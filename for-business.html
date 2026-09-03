@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Business · MINNK Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo_vectorizado/minnk-favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
+
+    <style>
+        /* ==================== VARIABLES ==================== */
+        :root {
+            --burgundy:  #86123E;
+            --off-white: #FCFBF9;
+            --linen:     #EDE6DA;
+            --almond:    #C9ADA7;
+            --ink:       #1A1614;
+            --stone:     #7A716B;
+
+            --font-display: 'Questrial', sans-serif;
+            --font-body:    'Inter', sans-serif;
+        }
+
+        /* ==================== RESET ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: var(--off-white);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: normal;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: var(--burgundy);
+        }
+
+        h2 {
+            font-size: 32px;
+            color: var(--burgundy);
+        }
+
+        h3 {
+            font-size: 20px;
+            color: var(--ink);
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--stone);
+        }
+
+        /* ==================== LAYOUT ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .bg-linen {
+            background: var(--linen);
+        }
+
+        .bg-off-white {
+            background: var(--off-white);
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: var(--off-white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--linen);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--burgundy);
+        }
+
+        /* ==================== HERO ==================== */
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 80px 0 60px;
+        }
+
+        .hero h1 {
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ==================== FEATURES LIST ==================== */
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            stroke: var(--burgundy);
+            stroke-width: 2;
+            fill: none;
+            margin-top: 2px;
+        }
+
+        .feature-content h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .feature-content p {
+            font-size: 14px;
+            color: var(--stone);
+        }
+
+        /* ==================== STEP SECTION ==================== */
+        .step-section {
+            margin-bottom: 0;
+        }
+
+        .step-header {
+            margin-bottom: 32px;
+        }
+
+        .step-number {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--burgundy);
+            margin-bottom: 8px;
+        }
+
+        .step-header h2 {
+            margin-bottom: 8px;
+        }
+
+        /* ==================== QUANTITY ==================== */
+        .quantity-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .quantity-card {
+            border: 2px solid var(--almond);
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .quantity-card:hover {
+            border-color: var(--burgundy);
+            background: var(--linen);
+        }
+
+        .quantity-card .number {
+            font-family: var(--font-display);
+            font-size: 36px;
+            color: var(--burgundy);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .quantity-card .label {
+            font-size: 13px;
+            color: var(--stone);
+        }
+
+        .quantity-card .price {
+            display: block;
+            margin-top: 12px;
+            font-size: 15px;
+            color: var(--almond);
+        }
+
+        /* ==================== UPLOAD ZONE ==================== */
+        .upload-zone {
+            margin-top: 32px;
+            border: 3px dashed var(--almond);
+            padding: 60px 20px;
+            text-align: center;
+            background: var(--linen);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--burgundy);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: var(--almond);
+            margin-bottom: 16px;
+        }
+
+        .upload-zone h3 {
+            margin-bottom: 8px;
+        }
+
+        .upload-instructions {
+            font-size: 13px;
+            color: var(--stone);
+            margin-top: 12px;
+        }
+
+        /* ==================== FORM ==================== */
+        .order-form {
+            margin-top: 32px;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+
+        label .optional {
+            font-weight: 300;
+            color: var(--stone);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            border: 1px solid var(--almond);
+            background: var(--off-white);
+            color: var(--ink);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--stone);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-note {
+            font-size: 13px;
+            color: var(--stone);
+            margin-top: 8px;
+        }
+
+        /* ==================== SUMMARY ==================== */
+        .summary-box {
+            margin-top: 32px;
+            padding: 32px;
+            background: var(--linen);
+            border: 1px solid var(--almond);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .summary-row .label {
+            color: var(--stone);
+        }
+
+        .summary-row .value {
+            font-weight: 400;
+            color: var(--ink);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 16px;
+            margin-top: 16px;
+            border-top: 1px solid var(--almond);
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .summary-total .value {
+            color: var(--burgundy);
+        }
+
+        .important-note {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--off-white);
+            border-left: 3px solid var(--burgundy);
+            font-size: 14px;
+            color: var(--ink);
+            font-weight: 400;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 24px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--ink);
+            color: var(--off-white);
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--linen);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--stone);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: var(--stone);
+        }
+
+        /* ==================== PLACEHOLDERS ==================== */
+        .placeholder {
+            background: var(--linen);
+            border: 2px dashed var(--almond);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .placeholder-name {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--burgundy);
+            margin-bottom: 8px;
+        }
+
+        .placeholder-desc {
+            font-size: 13px;
+            color: var(--stone);
+            max-width: 300px;
+        }
+
+        .placeholder-ratio-4-5 {
+            aspect-ratio: 4 / 5;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 56px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+            }
+
+            .features-list {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .quantity-options {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .footer-links {
+                flex-direction: row;
+                justify-content: center;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo_vectorizado/minnk-wordmark-burdeos.svg" alt="MINNK Studio">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="your-photos.html">Your Photos</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="for-business.html">For Business</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>For Business</h1>
+                <p>Custom magnets with your brand. Perfect for events, giveaways, or branded merchandise. One format, volume pricing, and consistent quality made in Copenhagen.</p>
+            </div>
+            <div class="hero-image">
+                <img src="images/business-product.jpg" alt="Business custom magnet with logo in context">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES ==================== -->
+    <section class="features bg-linen">
+        <div class="container">
+            <div class="features-list">
+                <div class="feature-item">
+                    <svg class="check-icon" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <div class="feature-content">
+                        <h3>Proof before production</h3>
+                        <p>Your artwork is reviewed before we begin</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <svg class="check-icon" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <div class="feature-content">
+                        <h3>Volume pricing</h3>
+                        <p>More units, better rates</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <svg class="check-icon" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <div class="feature-content">
+                        <h3>Logo setup included</h3>
+                        <p>We prepare your design for production</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <svg class="check-icon" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <div class="feature-content">
+                        <h3>Consistent quality</h3>
+                        <p>Made in Copenhagen with attention to detail</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BUILD YOUR ORDER ==================== -->
+    <section class="build-order bg-off-white">
+        <div class="container">
+            <h2>Build Your Order</h2>
+
+            <!-- STEP 1: QUANTITY -->
+            <div class="step-section" style="margin-top: 60px;">
+                <div class="step-header">
+                    <div class="step-number">Step 1</div>
+                    <h2>Choose Quantity</h2>
+                    <p class="form-note">Button 50×50mm · Prices under review — will be confirmed when we receive your request</p>
+                </div>
+
+                <div class="quantity-options">
+                    <div class="quantity-card" onclick="selectQuantity(25)">
+                        <span class="number">25</span>
+                        <span class="label">pieces</span>
+                        <span class="price">Price TBD</span>
+                    </div>
+
+                    <div class="quantity-card" onclick="selectQuantity(50)">
+                        <span class="number">50</span>
+                        <span class="label">pieces</span>
+                        <span class="price">Price TBD</span>
+                    </div>
+
+                    <div class="quantity-card" onclick="selectQuantity(100)">
+                        <span class="number">100</span>
+                        <span class="label">pieces</span>
+                        <span class="price">Price TBD</span>
+                    </div>
+
+                    <div class="quantity-card" onclick="selectQuantity(250)">
+                        <span class="number">250</span>
+                        <span class="label">pieces</span>
+                        <span class="price">Price TBD</span>
+                    </div>
+
+                    <div class="quantity-card" onclick="selectQuantity(500)">
+                        <span class="number">500</span>
+                        <span class="label">pieces</span>
+                        <span class="price">Price TBD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 2: UPLOAD LOGO/QR -->
+    <section class="upload-artwork bg-linen">
+        <div class="container">
+            <div class="step-section">
+                <div class="step-header">
+                    <div class="step-number">Step 2</div>
+                    <h2>Upload Your Logo or QR Code</h2>
+                </div>
+
+                <div class="upload-zone" onclick="document.getElementById('logo-input').click()">
+                    <div class="upload-icon">🎨</div>
+                    <h3>Drop your file here</h3>
+                    <p>or click to browse</p>
+                    <p class="upload-instructions">
+                        Upload your logo (PNG, SVG, AI, PDF) or QR code image.
+                        <br>High resolution preferred · Max 10MB
+                        <br>We'll check quality and confirm before production.
+                    </p>
+                </div>
+                <input type="file" id="logo-input" accept="image/*,.pdf,.ai,.svg" style="display:none" onchange="handleLogoUpload(event)">
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 3: YOUR DETAILS -->
+    <section class="business-details bg-off-white">
+        <div class="container">
+            <div class="step-section">
+                <div class="step-header">
+                    <div class="step-number">Step 3</div>
+                    <h2>Your Details</h2>
+                </div>
+
+                <form class="order-form" id="business-form">
+                    <!-- Hidden fields for order details -->
+                    <input type="hidden" name="form_type" value="for_business">
+                    <input type="hidden" name="product" value="Button 50×50mm">
+                    <input type="hidden" id="form-quantity" name="quantity" value="25">
+
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-name">Contact Person</label>
+                        <input type="text" id="contact-name" name="contact-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+45..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-preference">Preferred contact method</label>
+                        <select id="contact-preference" name="contact_preference" required>
+                            <option value="">Select one</option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postal-code">Postal Code</label>
+                        <input type="text" id="postal-code" name="postal-code" required>
+                        <p class="form-note">Free delivery in Copenhagen · Shipping coordinated elsewhere</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Notes <span class="optional">(optional)</span></label>
+                        <textarea id="notes" name="notes" placeholder="Event date, special instructions, or other details..."></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 4: REVIEW & SUBMIT -->
+    <section class="review-submit bg-linen">
+        <div class="container">
+            <div class="step-section">
+                <div class="step-header">
+                    <div class="step-number">Step 4</div>
+                    <h2>Review & Submit</h2>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span class="label">Product</span>
+                        <span class="value">Button 50×50mm</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Quantity</span>
+                        <span class="value">25 pieces</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Artwork</span>
+                        <span class="value">No file uploaded</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Delivery</span>
+                        <span class="value">Enter postal code</span>
+                    </div>
+
+                    <div class="summary-total">
+                        <span class="label">Total</span>
+                        <span class="value">To be confirmed</span>
+                    </div>
+
+                    <div class="important-note">
+                        <strong>This is a request.</strong> We'll review your artwork and confirm pricing before any payment. You'll receive a proof and final quote once we've checked everything.
+                    </div>
+                </div>
+
+                <button type="submit" form="business-form">Submit Request</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://instagram.com/minnkstudio" target="_blank">Instagram</a>
+                <a href="mailto:hello@minnkstudio.com">hello@minnkstudio.com</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <p class="footer-note">© 2026 MINNK Studio · Copenhagen, Denmark</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== STATE MANAGEMENT ====================
+        const state = {
+            quantity: 25,
+            logoFile: null,
+            postalCode: ''
+        };
+
+        // ==================== QUANTITY SELECTION ====================
+        function selectQuantity(qty) {
+            state.quantity = qty;
+
+            // Update UI
+            document.querySelectorAll('.quantity-card').forEach(card => {
+                card.style.borderColor = 'var(--almond)';
+                card.style.background = 'transparent';
+            });
+            event.currentTarget.style.borderColor = 'var(--burgundy)';
+            event.currentTarget.style.background = 'var(--linen)';
+
+            updateSummary();
+        }
+
+        // ==================== LOGO/QR UPLOAD ====================
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+
+            if (!file) return;
+
+            // Validate file size (10MB max)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File is too large. Maximum size is 10MB.');
+                return;
+            }
+
+            state.logoFile = file;
+            updateLogoPreview();
+            updateSummary();
+        }
+
+        function updateLogoPreview() {
+            const uploadZone = document.querySelector('.upload-zone');
+
+            if (!state.logoFile) {
+                uploadZone.innerHTML = `
+                    <div class="upload-icon">🎨</div>
+                    <h3>Drop your file here</h3>
+                    <p>or click to browse</p>
+                    <p class="upload-instructions">
+                        Upload your logo (PNG, SVG, AI, PDF) or QR code image.
+                        <br>High resolution preferred · Max 10MB
+                        <br>We'll check quality and confirm before production.
+                    </p>
+                    <input type="file" id="logo-input" accept="image/*,.pdf,.ai,.svg" style="display:none" onchange="handleLogoUpload(event)">
+                `;
+            } else {
+                uploadZone.innerHTML = `
+                    <div class="upload-icon">✓</div>
+                    <h3>File uploaded</h3>
+                    <p class="upload-instructions">
+                        ${state.logoFile.name}
+                        <br><button type="button" onclick="clearLogo()" style="margin-top:12px; padding:8px 16px; background:var(--ink); color:var(--off-white); border:none; border-radius:4px; cursor:pointer;">Change file</button>
+                    </p>
+                `;
+            }
+
+            // Re-attach click handler
+            uploadZone.onclick = () => document.getElementById('logo-input')?.click();
+        }
+
+        function clearLogo() {
+            state.logoFile = null;
+            updateLogoPreview();
+            updateSummary();
+        }
+
+        // ==================== POSTAL CODE & DELIVERY ====================
+        function updatePostalCode(event) {
+            state.postalCode = event.target.value;
+            updateSummary();
+        }
+
+        function getDeliveryText() {
+            const code = state.postalCode.trim();
+            if (code.startsWith('1') || code.startsWith('2')) {
+                return 'Copenhagen (free)';
+            } else if (code) {
+                return 'Shipping to be coordinated';
+            }
+            return 'Enter postal code';
+        }
+
+        // ==================== SUMMARY UPDATE ====================
+        function updateSummary() {
+            const logoText = state.logoFile ? '1 file uploaded' : 'No file uploaded';
+
+            document.querySelector('.summary-box .summary-row:nth-child(2) .value').textContent = `${state.quantity} pieces`;
+            document.querySelector('.summary-box .summary-row:nth-child(3) .value').textContent = logoText;
+            document.querySelector('.summary-box .summary-row:nth-child(4) .value').textContent = getDeliveryText();
+
+            // Update hidden form fields
+            document.getElementById('form-quantity').value = state.quantity;
+        }
+
+        // ==================== FORM SUBMISSION ====================
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Validate logo upload
+            if (!state.logoFile) {
+                alert('Please upload your logo or QR code before submitting.');
+                return;
+            }
+
+            // Create FormData
+            const formData = new FormData(event.target);
+
+            // Add logo as attachment
+            formData.append('logo', state.logoFile);
+
+            // Submit to Formspree
+            fetch('https://formspree.io/f/xqegqgzb', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show confirmation message
+                    document.querySelector('.review-submit').innerHTML = `
+                        <div class="container">
+                            <div style="text-align:center; padding:80px 20px;">
+                                <h2 style="color:var(--burgundy); margin-bottom:16px;">Request Received!</h2>
+                                <p style="font-size:16px; color:var(--ink); max-width:500px; margin:0 auto 24px;">
+                                    Thank you! We've received your request and will review your artwork.
+                                    You'll receive a proof and final quote before any payment.
+                                </p>
+                                <p style="font-size:14px; color:var(--stone);">
+                                    We'll contact you at <strong>${formData.get('email')}</strong>
+                                </p>
+                                <a href="index.html" style="display:inline-block; margin-top:32px; padding:14px 32px; background:var(--ink); color:var(--off-white); text-decoration:none; border-radius:4px;">Back to Home</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    alert('There was a problem submitting your request. Please try again or contact us directly.');
+                }
+            })
+            .catch(error => {
+                alert('There was a problem submitting your request. Please try again or contact us directly.');
+            });
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize upload zone
+            updateLogoPreview();
+
+            // Set default quantity
+            updateSummary();
+
+            // Attach postal code listener
+            document.getElementById('postal-code').addEventListener('input', updatePostalCode);
+
+            // Attach form submission
+            document.getElementById('business-form').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+
+</body>
+</html>

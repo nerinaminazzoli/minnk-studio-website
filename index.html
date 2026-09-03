@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINNK Studio · Personalised Magnets Made in Copenhagen</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo_vectorizado/minnk-favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
+
+    <style>
+        /* ==================== VARIABLES ==================== */
+        :root {
+            --burgundy:  #86123E;
+            --off-white: #FCFBF9;
+            --linen:     #EDE6DA;
+            --almond:    #C9ADA7;
+            --ink:       #1A1614;
+            --stone:     #7A716B;
+
+            --font-display: 'Questrial', sans-serif;
+            --font-body:    'Inter', sans-serif;
+        }
+
+        /* ==================== RESET ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: var(--off-white);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: normal;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: var(--burgundy);
+        }
+
+        h2 {
+            font-size: 32px;
+            color: var(--burgundy);
+        }
+
+        h3 {
+            font-size: 18px;
+            color: var(--ink);
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--stone);
+        }
+
+        /* ==================== LAYOUT ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .bg-linen {
+            background: var(--linen);
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: var(--off-white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--linen);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--burgundy);
+        }
+
+        /* ==================== SCROLLING BANNER ==================== */
+        .scrolling-banner {
+            background: var(--ink);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 12px 0;
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--off-white);
+        }
+
+        .scrolling-text span {
+            padding: 0 60px;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            position: relative;
+            background: var(--off-white);
+            overflow: visible;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            display: block;
+        }
+
+        .hero h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            color: var(--burgundy);
+            background: rgba(252, 251, 249, 0.9);
+            padding: 24px 40px;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+
+        .hero .placeholder-ratio-16-9 {
+            aspect-ratio: auto;
+            height: 100%;
+        }
+
+        /* ==================== TRUST ICONS ==================== */
+        .trust-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            padding: 40px 20px;
+            background: var(--off-white);
+            border-bottom: 1px solid var(--linen);
+        }
+
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .trust-icon {
+            width: 48px;
+            height: 48px;
+            stroke: var(--burgundy);
+            stroke-width: 1.4;
+            fill: none;
+        }
+
+        .trust-text {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--stone);
+        }
+
+        /* ==================== START HERE ==================== */
+        .start-here {
+            text-align: center;
+        }
+
+        .start-here h2 {
+            margin-bottom: 8px;
+        }
+
+        .start-here > p {
+            margin-bottom: 32px;
+        }
+
+        .start-here-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .combo-card {
+            background: var(--off-white);
+            border: 1px solid var(--almond);
+            padding: 16px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .combo-card:hover {
+            border-color: var(--burgundy);
+        }
+
+        .combo-card h3 {
+            margin: 12px 0 6px;
+            font-size: 16px;
+        }
+
+        .combo-card .price {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--ink);
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* ==================== EDITORIAL BLOCKS ==================== */
+        .editorial-blocks {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            padding: 80px 0;
+        }
+
+        .editorial-block {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .editorial-block:nth-child(even) .editorial-image {
+            order: 2;
+        }
+
+        .editorial-block:nth-child(even) .editorial-content {
+            order: 1;
+        }
+
+        .editorial-image {
+            width: 100%;
+        }
+
+        .editorial-content h3 {
+            font-size: 28px;
+            color: var(--burgundy);
+            margin-bottom: 12px;
+        }
+
+        .editorial-content p {
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        /* ==================== HOW IT WORKS ==================== */
+        .how-it-works {
+            background: var(--linen);
+            text-align: center;
+        }
+
+        .how-it-works h2 {
+            margin-bottom: 48px;
+        }
+
+        .steps-row {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .step-card {
+            flex: 0 0 280px;
+            background: var(--off-white);
+            padding: 32px 24px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .step-number {
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--burgundy);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .step-card h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .step-card p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ==================== CONTACT ==================== */
+        .contact {
+            background: var(--ink);
+            color: var(--off-white);
+        }
+
+        .contact h2,
+        .contact p,
+        .contact label {
+            color: var(--off-white);
+        }
+
+        .contact .container {
+            max-width: 600px;
+        }
+
+        .contact h2 {
+            margin-bottom: 12px;
+        }
+
+        .contact p {
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            border: 1px solid var(--off-white);
+            background: transparent;
+            color: var(--off-white);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--almond);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--off-white);
+            color: var(--burgundy);
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--linen);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--stone);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: var(--stone);
+        }
+
+        /* ==================== PLACEHOLDERS ==================== */
+        .placeholder {
+            background: var(--linen);
+            border: 2px dashed var(--almond);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .placeholder-name {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--burgundy);
+            margin-bottom: 8px;
+        }
+
+        .placeholder-desc {
+            font-size: 13px;
+            color: var(--stone);
+            max-width: 300px;
+        }
+
+        .placeholder-ratio-16-9 {
+            aspect-ratio: 16 / 9;
+        }
+
+        .placeholder-ratio-1-1 {
+            aspect-ratio: 1 / 1;
+        }
+
+        .placeholder-ratio-4-5 {
+            aspect-ratio: 4 / 5;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 56px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .hero-image {
+                height: 600px;
+            }
+
+            .trust-icons {
+                flex-direction: row;
+                gap: 80px;
+            }
+
+            .start-here-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+
+            .editorial-block {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+            }
+
+            .steps-row {
+                justify-content: center;
+                overflow-x: visible;
+            }
+
+            .step-card {
+                flex: 0 0 240px;
+            }
+
+            .footer-links {
+                flex-direction: row;
+                justify-content: center;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="logo_vectorizado/minnk-wordmark-burdeos.svg" alt="MINNK Studio">
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="your-photos.html">Your Photos</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="for-business.html">For Business</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== SCROLLING BANNER ==================== -->
+    <div class="scrolling-banner">
+        <div class="scrolling-text">
+            <span>FREE DELIVERY IN COPENHAGEN</span>
+            <span>FREE DELIVERY IN COPENHAGEN</span>
+            <span>FREE DELIVERY IN COPENHAGEN</span>
+            <span>FREE DELIVERY IN COPENHAGEN</span>
+            <span>FREE DELIVERY IN COPENHAGEN</span>
+            <span>FREE DELIVERY IN COPENHAGEN</span>
+        </div>
+    </div>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <h1>Your Favourite Moments,<br>Made to Last</h1>
+        <div class="hero-image">
+            <img src="images/hero-home.jpg" alt="MINNK custom photo magnets on warm surface">
+        </div>
+    </section>
+
+    <!-- ==================== TRUST ICONS ==================== -->
+    <div class="trust-icons">
+        <div class="trust-item">
+            <svg class="trust-icon" viewBox="0 -6 40 36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 30V18l6-6 6 6v12"/>
+                <path d="M14 30V14l6-8 6 8v16"/>
+                <path d="M26 30V17l6-8 6 8v13"/>
+                <rect x="6" y="22" width="4" height="4"/>
+                <rect x="18" y="19" width="4" height="4"/>
+                <rect x="30" y="21" width="4" height="4"/>
+                <path d="M0 30h40"/>
+                <path d="M20 6V-4"/>
+                <path d="M20 -4h8v5h-8z"/>
+                <path d="M23 -4v5"/>
+                <path d="M20 -1.5h8"/>
+            </svg>
+            <span class="trust-text">Made in Copenhagen</span>
+        </div>
+        <div class="trust-item">
+            <svg class="trust-icon" viewBox="0 0 40 28" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20V7a1 1 0 0 1 1-1h17v14"/>
+                <path d="M20 11h8l6 6v3h-3"/>
+                <path d="M2 20h3"/>
+                <path d="M20 20h6"/>
+                <circle cx="10" cy="22" r="2.6"/>
+                <circle cx="27" cy="22" r="2.6"/>
+            </svg>
+            <span class="trust-text">Delivered in 3-4 business days</span>
+        </div>
+    </div>
+
+    <!-- ==================== START HERE ==================== -->
+    <section class="start-here bg-linen">
+        <div class="container">
+            <h2>Start Here</h2>
+            <p>Quick picks, zero decisions. Choose your pack and upload your photos.</p>
+
+            <div class="start-here-grid">
+                <div class="combo-card">
+                    <img src="images/start-here-01.jpg" alt="Button magnets 50×50mm pack of 8">
+                    <h3>Button · Pack of 8</h3>
+                    <span class="price">DKK 169</span>
+                </div>
+
+                <div class="combo-card">
+                    <img src="images/start-here-02.jpg" alt="Button magnets 50×50mm pack of 4">
+                    <h3>Button · Pack of 4</h3>
+                    <span class="price">DKK 99</span>
+                </div>
+
+                <div class="combo-card">
+                    <img src="images/start-here-03.jpg" alt="Flat Frame magnets 70×70mm pack of 12">
+                    <h3>Flat Frame · Pack of 12</h3>
+                    <span class="price">DKK 189</span>
+                </div>
+
+                <div class="combo-card">
+                    <img src="images/start-here-04.jpg" alt="Flat Polaroid magnets 70×90mm pack of 12">
+                    <h3>Flat Polaroid · Pack of 12</h3>
+                    <span class="price">DKK 189</span>
+                </div>
+            </div>
+
+            <a href="your-photos.html" class="btn-primary">Explore Your Photos</a>
+        </div>
+    </section>
+
+    <!-- ==================== EDITORIAL BLOCKS ==================== -->
+    <section class="editorial-blocks">
+        <div class="container">
+            <div class="editorial-block">
+                <div class="editorial-image">
+                    <img src="images/line-your-photos.jpg" alt="Custom photo magnet detail">
+                </div>
+                <div class="editorial-content">
+                    <h3>Your Photos</h3>
+                    <p>Turn your moments into magnets</p>
+                    <a href="your-photos.html" class="btn-primary">Explore Your Photos</a>
+                </div>
+            </div>
+
+            <div class="editorial-block">
+                <div class="editorial-image">
+                    <img src="images/line-collections.jpg" alt="MINNK Collections pack">
+                </div>
+                <div class="editorial-content">
+                    <h3>Collections</h3>
+                    <p>Curated sets designed by MINNK</p>
+                    <a href="collections.html" class="btn-primary">Explore Collections</a>
+                </div>
+            </div>
+
+            <div class="editorial-block">
+                <div class="editorial-image">
+                    <img src="images/line-business.jpg" alt="Business magnet with logo in context">
+                </div>
+                <div class="editorial-content">
+                    <h3>For Business</h3>
+                    <p>Custom magnets with your brand</p>
+                    <a href="for-business.html" class="btn-primary">Explore For Business</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+
+            <div class="steps-row">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>Choose Your Pack</h3>
+                    <p>Pick your format and quantity</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>Upload Your Photos</h3>
+                    <p>One photo or many — we'll match them to your pack</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>We Review & Confirm</h3>
+                    <p>This is a request. We'll check quality and send you a preview before any payment</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h3>You Pay & We Make</h3>
+                    <p>Once approved, we'll send you payment details and start production</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">05</div>
+                    <h3>Delivered to You</h3>
+                    <p>Free delivery in Copenhagen, or coordinated shipping elsewhere</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Something Else in Mind?</h2>
+            <p>Have a custom idea, special occasion, or questions? Let's talk.</p>
+
+            <form class="contact-form" action="https://formspree.io/f/xqegqgzb" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="form_type" value="contact">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Mobile phone (optional)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+45...">
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="whatsapp_ok" name="whatsapp_ok" style="width: auto; margin: 0;">
+                        <span>OK to reach me on WhatsApp</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Add a reference image (optional)</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://instagram.com/minnkstudio" target="_blank">Instagram</a>
+                <a href="mailto:hello@minnkstudio.com">hello@minnkstudio.com</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <p class="footer-note">© 2026 MINNK Studio · Copenhagen, Denmark</p>
+        </div>
+    </footer>
+
+</body>
+</html>

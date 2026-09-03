@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections · MINNK Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo_vectorizado/minnk-favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
+
+    <style>
+        /* ==================== VARIABLES ==================== */
+        :root {
+            --burgundy:  #86123E;
+            --off-white: #FCFBF9;
+            --linen:     #EDE6DA;
+            --almond:    #C9ADA7;
+            --ink:       #1A1614;
+            --stone:     #7A716B;
+
+            --font-display: 'Questrial', sans-serif;
+            --font-body:    'Inter', sans-serif;
+        }
+
+        /* ==================== RESET ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: var(--off-white);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: normal;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: var(--burgundy);
+        }
+
+        h2 {
+            font-size: 32px;
+            color: var(--burgundy);
+        }
+
+        h3 {
+            font-size: 20px;
+            color: var(--ink);
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--stone);
+        }
+
+        /* ==================== LAYOUT ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: var(--off-white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--linen);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--burgundy);
+        }
+
+        /* ==================== PAGE INTRO ==================== */
+        .page-intro {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .page-intro h1 {
+            margin-bottom: 16px;
+        }
+
+        .page-intro p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        /* ==================== COLLECTIONS GRID ==================== */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .collection-card {
+            background: var(--linen);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .collection-image {
+            aspect-ratio: 1 / 1;
+            background: var(--off-white);
+        }
+
+        .collection-content {
+            padding: 24px;
+        }
+
+        .collection-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .collection-content p {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--ink);
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--off-white);
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px 32px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--stone);
+            background: none;
+            border: none;
+            line-height: 1;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 24px;
+        }
+
+        /* ==================== TEXT INPUT (TRACING) ==================== */
+        .text-input-group {
+            margin-bottom: 24px;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 16px;
+            font-family: var(--font-body);
+            font-size: 18px;
+            border: 2px solid var(--almond);
+            background: var(--off-white);
+            color: var(--ink);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: var(--burgundy);
+        }
+
+        .input-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--stone);
+        }
+
+        .price-display {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--burgundy);
+            margin-top: 16px;
+            margin-bottom: 24px;
+        }
+
+        /* ==================== FORM ==================== */
+        .order-form {
+            margin-top: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+
+        label .optional {
+            font-weight: 300;
+            color: var(--stone);
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            border: 1px solid var(--almond);
+            background: var(--off-white);
+            color: var(--ink);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--stone);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-note {
+            font-size: 13px;
+            color: var(--stone);
+            margin-top: 8px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            margin-top: 24px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--ink);
+            color: var(--off-white);
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            opacity: 0.9;
+        }
+
+        .important-note {
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--linen);
+            border-left: 3px solid var(--burgundy);
+            font-size: 13px;
+            color: var(--ink);
+            font-weight: 400;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--linen);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--stone);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: var(--stone);
+        }
+
+        /* ==================== PLACEHOLDERS ==================== */
+        .placeholder {
+            background: var(--linen);
+            border: 2px dashed var(--almond);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .placeholder-name {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--burgundy);
+            margin-bottom: 8px;
+        }
+
+        .placeholder-desc {
+            font-size: 13px;
+            color: var(--stone);
+            max-width: 300px;
+        }
+
+        .placeholder-ratio-1-1 {
+            aspect-ratio: 1 / 1;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 56px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .collections-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .footer-links {
+                flex-direction: row;
+                justify-content: center;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo_vectorizado/minnk-wordmark-burdeos.svg" alt="MINNK Studio">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="your-photos.html">Your Photos</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="for-business.html">For Business</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== PAGE INTRO ==================== -->
+    <section class="page-intro">
+        <div class="container">
+            <h1>Collections</h1>
+            <p>MINNK designs, not just prints. Curated sets that work straight out of the box — no photo needed, just choose and order.</p>
+        </div>
+    </section>
+
+    <!-- ==================== COLLECTIONS GRID ==================== -->
+    <section class="collections-section">
+        <div class="container">
+            <div class="collections-grid">
+
+                <!-- TRACING CARD -->
+                <div class="collection-card">
+                    <div class="collection-image">
+                        <img src="images/tracing-pack.jpg" alt="Tracing collection letter magnets pack">
+                    </div>
+                    <div class="collection-content">
+                        <h3>Tracing</h3>
+                        <p>Spell it out. Button magnets with one letter each — your name, theirs, a word that matters.</p>
+                        <button class="btn-primary" onclick="openModal('tracing')">Customize</button>
+                    </div>
+                </div>
+
+                <!-- PLACES CARD -->
+                <div class="collection-card">
+                    <div class="collection-image">
+                        <img src="images/places-pack.jpg" alt="Places collection Copenhagen landmarks pack">
+                    </div>
+                    <div class="collection-content">
+                        <h3>Places</h3>
+                        <p>Four landmarks, one country. Button magnet sets designed for the places that shaped you.</p>
+                        <button class="btn-primary" onclick="openModal('places')">Order</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TRACING MODAL ==================== -->
+    <div class="modal" id="modal-tracing" onclick="closeModalOnOutside(event, 'tracing')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('tracing')">&times;</button>
+            <h2>Tracing</h2>
+
+            <div class="text-input-group">
+                <input
+                    type="text"
+                    class="name-input"
+                    id="tracing-input"
+                    placeholder="TYPE YOUR NAME"
+                    maxlength="20"
+                    oninput="updateTracingPrice()"
+                >
+                <div class="input-info">
+                    <span id="tracing-letters">0 letters</span>
+                    <span id="tracing-pieces">Minimum 5 pieces</span>
+                </div>
+                <div class="price-display" id="tracing-price">DKK 95</div>
+            </div>
+
+            <form class="order-form" id="tracing-form" onsubmit="handleTracingSubmit(event)">
+                <input type="hidden" name="form_type" value="tracing">
+                <input type="hidden" id="tracing-name-hidden" name="custom_name" value="">
+                <input type="hidden" id="tracing-letters-hidden" name="letters" value="0">
+                <input type="hidden" id="tracing-pieces-hidden" name="pieces" value="5">
+                <input type="hidden" id="tracing-price-hidden" name="price" value="95">
+
+                <div class="form-group">
+                    <label for="tracing-customer-name">Your Name</label>
+                    <input type="text" id="tracing-customer-name" name="customer_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tracing-email">Email</label>
+                    <input type="email" id="tracing-email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tracing-phone">Phone</label>
+                    <input type="tel" id="tracing-phone" name="phone" placeholder="+45..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tracing-contact-preference">Preferred contact method</label>
+                    <select id="tracing-contact-preference" name="contact_preference" required>
+                        <option value="">Select one</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tracing-postal-code">Postal Code</label>
+                    <input type="text" id="tracing-postal-code" name="postal_code" required>
+                    <p class="form-note">Free delivery in Copenhagen</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="tracing-notes">Notes <span class="optional">(optional)</span></label>
+                    <textarea id="tracing-notes" name="notes" placeholder="Special occasion, deadline..."></textarea>
+                </div>
+
+                <div class="important-note">
+                    <strong>This is a request.</strong> We'll review it and confirm before any payment.
+                </div>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== PLACES MODAL ==================== -->
+    <div class="modal" id="modal-places" onclick="closeModalOnOutside(event, 'places')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('places')">&times;</button>
+            <h2>Places</h2>
+
+            <form class="order-form" id="places-form" onsubmit="handlePlacesSubmit(event)">
+                <input type="hidden" name="form_type" value="places">
+                <input type="hidden" name="product" value="Places · 4x Button 50×50mm">
+                <input type="hidden" name="price" value="Price TBD">
+
+                <div class="form-group">
+                    <label for="places-country">Country</label>
+                    <select id="places-country" name="country" required>
+                        <option value="">Select country</option>
+                        <option value="denmark">Denmark</option>
+                    </select>
+                    <p class="form-note">More countries coming soon</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="places-quantity">Quantity</label>
+                    <select id="places-quantity" name="quantity" required>
+                        <option value="1">1 pack (4 magnets)</option>
+                        <option value="2">2 packs (8 magnets)</option>
+                        <option value="3">3 packs (12 magnets)</option>
+                        <option value="5">5 packs (20 magnets)</option>
+                    </select>
+                </div>
+
+                <div class="price-display">Price TBD · Under review</div>
+
+                <div class="form-group">
+                    <label for="places-customer-name">Your Name</label>
+                    <input type="text" id="places-customer-name" name="customer_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="places-email">Email</label>
+                    <input type="email" id="places-email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="places-phone">Phone</label>
+                    <input type="tel" id="places-phone" name="phone" placeholder="+45..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="places-contact-preference">Preferred contact method</label>
+                    <select id="places-contact-preference" name="contact_preference" required>
+                        <option value="">Select one</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="places-postal-code">Postal Code</label>
+                    <input type="text" id="places-postal-code" name="postal_code" required>
+                    <p class="form-note">Free delivery in Copenhagen</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="places-notes">Notes <span class="optional">(optional)</span></label>
+                    <textarea id="places-notes" name="notes" placeholder="Special occasion, deadline..."></textarea>
+                </div>
+
+                <div class="important-note">
+                    <strong>This is a request.</strong> We'll review it and confirm pricing before any payment.
+                </div>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://instagram.com/minnkstudio" target="_blank">Instagram</a>
+                <a href="mailto:hello@minnkstudio.com">hello@minnkstudio.com</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <p class="footer-note">© 2026 MINNK Studio · Copenhagen, Denmark</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== MODAL MANAGEMENT ====================
+        function openModal(type) {
+            document.getElementById(`modal-${type}`).classList.add('active');
+            if (type === 'tracing') {
+                updateTracingPrice();
+            }
+        }
+
+        function closeModal(type) {
+            document.getElementById(`modal-${type}`).classList.remove('active');
+        }
+
+        function closeModalOnOutside(event, type) {
+            if (event.target.classList.contains('modal')) {
+                closeModal(type);
+            }
+        }
+
+        // ==================== TRACING PRICE CALCULATION ====================
+        function updateTracingPrice() {
+            const input = document.getElementById('tracing-input');
+            const name = input.value.toUpperCase().replace(/[^A-Z]/g, ''); // Only letters
+            const letters = name.length;
+
+            // Minimum 5 pieces
+            const pieces = Math.max(5, letters);
+
+            // DKK 19 per letter, minimum DKK 95
+            const price = Math.max(95, letters * 19);
+
+            // Update UI
+            document.getElementById('tracing-letters').textContent = `${letters} letter${letters !== 1 ? 's' : ''}`;
+            document.getElementById('tracing-pieces').textContent = `${pieces} piece${pieces !== 1 ? 's' : ''}`;
+            document.getElementById('tracing-price').textContent = `DKK ${price}`;
+
+            // Update hidden fields
+            document.getElementById('tracing-name-hidden').value = name;
+            document.getElementById('tracing-letters-hidden').value = letters;
+            document.getElementById('tracing-pieces-hidden').value = pieces;
+            document.getElementById('tracing-price-hidden').value = price;
+
+            // Keep input uppercase
+            input.value = name;
+        }
+
+        // ==================== FORM SUBMISSIONS ====================
+        function handleTracingSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('tracing-input').value.trim();
+            if (name.length === 0) {
+                alert('Please enter a name to spell out.');
+                return;
+            }
+
+            submitForm(event.target, 'Tracing');
+        }
+
+        function handlePlacesSubmit(event) {
+            event.preventDefault();
+            submitForm(event.target, 'Places');
+        }
+
+        function submitForm(form, productType) {
+            const formData = new FormData(form);
+
+            fetch('https://formspree.io/f/xqegqgzb', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show confirmation
+                    const modalId = productType.toLowerCase();
+                    document.getElementById(`modal-${modalId}`).querySelector('.modal-content').innerHTML = `
+                        <div style="text-align:center; padding:40px 20px;">
+                            <h2 style="color:var(--burgundy); margin-bottom:12px;">Request Received!</h2>
+                            <p style="font-size:15px; color:var(--ink);">
+                                Thank you! We've received your ${productType} request.
+                                You'll receive confirmation before any payment.
+                            </p>
+                            <p style="font-size:14px; color:var(--stone); margin-top:12px;">
+                                We'll contact you at <strong>${formData.get('email')}</strong>
+                            </p>
+                            <a href="index.html" style="display:inline-block; margin-top:24px; padding:12px 24px; background:var(--ink); color:var(--off-white); text-decoration:none; border-radius:4px; font-size:13px;">Back to Home</a>
+                        </div>
+                    `;
+                } else {
+                    alert('There was a problem submitting your request. Please try again or contact us directly.');
+                }
+            })
+            .catch(error => {
+                alert('There was a problem submitting your request. Please try again or contact us directly.');
+            });
+        }
+    </script>
+
+</body>
+</html>

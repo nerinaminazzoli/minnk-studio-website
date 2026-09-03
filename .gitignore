@@ -1,0 +1,6 @@
+.DS_Store
+*.md
+!README.md
+.claude/
+node_modules/
+index-old-backup.html

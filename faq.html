@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ · MINNK Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo_vectorizado/minnk-favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
+
+    <style>
+        /* ==================== VARIABLES ==================== */
+        :root {
+            --burgundy:  #86123E;
+            --off-white: #FCFBF9;
+            --linen:     #EDE6DA;
+            --almond:    #C9ADA7;
+            --ink:       #1A1614;
+            --stone:     #7A716B;
+
+            --font-display: 'Questrial', sans-serif;
+            --font-body:    'Inter', sans-serif;
+        }
+
+        /* ==================== RESET ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: var(--off-white);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: normal;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: var(--burgundy);
+        }
+
+        h2 {
+            font-size: 32px;
+            color: var(--burgundy);
+        }
+
+        h3 {
+            font-size: 20px;
+            color: var(--ink);
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--stone);
+        }
+
+        /* ==================== LAYOUT ==================== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: var(--off-white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--linen);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--burgundy);
+        }
+
+        /* ==================== PAGE INTRO ==================== */
+        .page-intro {
+            text-align: center;
+            padding: 80px 0 40px;
+        }
+
+        .page-intro h1 {
+            margin-bottom: 12px;
+        }
+
+        .page-intro p {
+            font-size: 16px;
+        }
+
+        /* ==================== FAQ SECTION ==================== */
+        .faq-section {
+            margin-bottom: 60px;
+        }
+
+        .faq-section h2 {
+            margin-bottom: 24px;
+        }
+
+        /* ==================== ACCORDION ==================== */
+        .accordion-item {
+            margin-bottom: 12px;
+            border: 1px solid var(--almond);
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--off-white);
+            transition: border-color 0.2s;
+        }
+
+        .accordion-item.active {
+            border-color: var(--burgundy);
+        }
+
+        .accordion-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .accordion-question:hover {
+            background: var(--linen);
+        }
+
+        .accordion-question h3 {
+            font-size: 16px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            color: var(--ink);
+            flex: 1;
+            padding-right: 16px;
+        }
+
+        .accordion-icon {
+            font-size: 20px;
+            color: var(--burgundy);
+            font-weight: 300;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .accordion-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-answer-content {
+            padding: 0 24px 24px 24px;
+            background: var(--linen);
+        }
+
+        .accordion-answer p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--stone);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--linen);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--stone);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: var(--stone);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 56px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .footer-links {
+                flex-direction: row;
+                justify-content: center;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo_vectorizado/minnk-wordmark-burdeos.svg" alt="MINNK Studio">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="your-photos.html">Your Photos</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="for-business.html">For Business</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==================== PAGE INTRO ==================== -->
+    <section class="page-intro">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Everything you need to know about ordering, photos, and delivery</p>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ SECTIONS ==================== -->
+    <section class="faq-content">
+        <div class="container">
+
+            <!-- ORDERING & PAYMENT -->
+            <div class="faq-section">
+                <h2>Ordering & Payment</h2>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>How does ordering work?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>Choose your product, upload photos if needed, and submit as a request. We review it and confirm within 1 business day.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>When do I pay?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>Once we confirm your order, we'll send a payment request by email — MobilePay or bank transfer, your choice. Production starts once payment is received.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>Can I see a preview before it's printed?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>For Business and bulk orders, yes: we send a digital proof before production. For personal orders, we review your photos as part of confirming your request.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHOTOS & PERSONALISATION -->
+            <div class="faq-section">
+                <h2>Photos & Personalisation</h2>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>Are your magnets handmade?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>Yes. Each magnet is pressed by hand in our studio in Copenhagen, so small variations between pieces are part of the process, not a flaw.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>Can I use a different photo for each magnet?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>Yes, upload one photo per magnet, or one photo to repeat across the whole pack.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>What photos work best?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>Clear, well-lit original photos, not screenshots or images downloaded from social media (compression lowers quality). Since our magnets are printed small, a normal smartphone photo is more than enough.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>Do you retouch or edit photos?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>No. We print exactly what you send us, so photo quality matters.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELIVERY -->
+            <div class="faq-section">
+                <h2>Delivery</h2>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>How long does it take?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>3 to 4 business days within Copenhagen, from the moment payment is received. Outside Copenhagen, add courier time, usually 5 to 7 business days total, though it can vary by courier.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>Is delivery free?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>Yes, within Copenhagen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-question" onclick="toggleAccordion(this)">
+                        <h3>Do you deliver outside Copenhagen?</h3>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-answer">
+                        <div class="accordion-answer-content">
+                            <p>Yes: DKK 35 to a pickup point, or DKK 49 to your door.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://instagram.com/minnkstudio" target="_blank">Instagram</a>
+                <a href="mailto:hello@minnkstudio.com">hello@minnkstudio.com</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <p class="footer-note">© 2026 MINNK Studio · Copenhagen, Denmark</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.accordion-icon');
+            const isActive = item.classList.contains('active');
+
+            // Close all accordion items
+            document.querySelectorAll('.accordion-item').forEach(accordionItem => {
+                accordionItem.classList.remove('active');
+                const accordionAnswer = accordionItem.querySelector('.accordion-answer');
+                const accordionIcon = accordionItem.querySelector('.accordion-icon');
+                accordionAnswer.style.maxHeight = null;
+                accordionIcon.textContent = '+';
+            });
+
+            // If the clicked item wasn't active, open it
+            if (!isActive) {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.textContent = '−';
+            }
+        }
+    </script>
+
+</body>
+</html>

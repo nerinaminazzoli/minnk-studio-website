@@ -129,6 +129,83 @@
             color: var(--burgundy);
         }
 
+        /* Hamburger button (mobile only) */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--burgundy);
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hide desktop nav in mobile */
+        header nav {
+            display: none;
+        }
+
+        /* Mobile menu overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--off-white);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            text-align: center;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-display);
+            font-size: 28px;
+            color: var(--burgundy);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            opacity: 0.7;
+        }
+
         /* ==================== SCROLLING BANNER ==================== */
         .scrolling-banner {
             background: var(--ink);
@@ -196,7 +273,7 @@
 
         .hero h1 {
             font-family: var(--font-display);
-            font-size: 52px;
+            font-size: 36px;
             line-height: 1.1;
             text-align: left;
             color: var(--off-white);
@@ -209,7 +286,7 @@
 
         .hero-subtitle {
             font-family: var(--font-body);
-            font-size: 17px;
+            font-size: 14px;
             font-weight: 300;
             line-height: 1.5;
             color: var(--off-white);
@@ -413,14 +490,12 @@
         }
 
         .steps-row {
-            display: flex;
-            gap: 24px;
-            overflow-x: auto;
-            padding-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
         }
 
         .step-card {
-            flex: 0 0 280px;
             background: var(--off-white);
             padding: 32px 24px;
             border-radius: 8px;
@@ -443,6 +518,12 @@
         .step-card p {
             font-size: 14px;
             line-height: 1.6;
+        }
+
+        .step-card:last-child {
+            grid-column: 1 / -1;
+            max-width: 280px;
+            margin: 0 auto;
         }
 
         /* ==================== CONTACT ==================== */
@@ -604,6 +685,19 @@
                 padding: 80px 0;
             }
 
+            /* Show desktop nav, hide hamburger and mobile menu */
+            .hamburger {
+                display: none;
+            }
+
+            header nav {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
             .hero {
                 height: 600px;
             }
@@ -628,12 +722,19 @@
             }
 
             .steps-row {
+                display: flex;
                 justify-content: center;
-                overflow-x: visible;
+                gap: 20px;
             }
 
             .step-card {
                 flex: 0 0 240px;
+            }
+
+            .step-card:last-child {
+                grid-column: auto;
+                max-width: none;
+                margin: 0;
             }
 
             .footer-links {
@@ -660,6 +761,11 @@
                 <div class="logo">
                     <img src="logo_vectorizado/minnk-wordmark-burdeos.svg" alt="MINNK Studio">
                 </div>
+                <button class="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <nav>
                     <ul>
                         <li><a href="your-photos.html">Your Photos</a></li>
@@ -668,6 +774,22 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MOBILE MENU ==================== -->
+    <div class="mobile-menu">
+        <nav>
+            <a href="your-photos.html">Your Photos</a>
+            <a href="collections.html">Collections</a>
+            <a href="for-business.html">For Business</a>
+            <a href="#contact" class="mobile-menu-close">Contact</a>
+        </nav>
+    </div>
+
+    <!-- ==================== SCROLLING BANNER ==================== -->
+    <div class="scrolling-banner">
             </div>
         </div>
     </header>
@@ -778,24 +900,24 @@
             </div>
 
             <div class="editorial-block">
-                <div class="editorial-image">
-                    <img src="images/line-business.jpg" alt="Business magnet with logo in context">
-                </div>
                 <div class="editorial-content">
                     <h3>For Business</h3>
                     <p>Custom magnets with your brand</p>
                     <a href="for-business.html" class="btn-primary">Explore For Business</a>
                 </div>
+                <div class="editorial-image">
+                    <img src="images/line-business.jpg" alt="Business magnet with logo in context">
+                </div>
             </div>
 
             <div class="editorial-block">
-                <div class="editorial-image">
-                    <img src="images/line-collections.jpg" alt="MINNK Collections pack">
-                </div>
                 <div class="editorial-content">
                     <h3>Collections</h3>
                     <p>Curated sets designed by MINNK</p>
                     <a href="collections.html" class="btn-primary">Explore Collections</a>
+                </div>
+                <div class="editorial-image">
+                    <img src="images/line-collections.jpg" alt="MINNK Collections pack">
                 </div>
             </div>
         </div>
@@ -897,6 +1019,37 @@
             <p class="footer-note">© 2026 MINNK Studio · Copenhagen, Denmark</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking a link
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 
 </body>
 </html>

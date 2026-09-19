@@ -143,7 +143,7 @@
         }
 
         .hero {
-            padding: 80px 0 60px;
+            padding: 40px 0 60px;
         }
 
         .hero h1 {
@@ -461,6 +461,97 @@
             aspect-ratio: 4 / 5;
         }
 
+        /* ==================== IMAGE GALLERY ==================== */
+        .image-gallery {
+            position: relative;
+            width: 100%;
+        }
+
+        .gallery-main {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 8px;
+            background: var(--linen);
+        }
+
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(252, 251, 249, 0.9);
+            border: 1px solid var(--almond);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            z-index: 5;
+        }
+
+        .gallery-arrow:hover {
+            background: var(--off-white);
+            border-color: var(--burgundy);
+        }
+
+        .gallery-arrow-left {
+            left: 16px;
+        }
+
+        .gallery-arrow-right {
+            right: 16px;
+        }
+
+        .gallery-arrow svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--burgundy);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            max-width: 280px;
+        }
+
+        .gallery-thumb {
+            flex: 1;
+            aspect-ratio: 1 / 1;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .gallery-thumb:hover {
+            border-color: var(--almond);
+        }
+
+        .gallery-thumb.active {
+            border-color: var(--burgundy);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         /* ==================== RESPONSIVE ==================== */
         @media (min-width: 768px) {
             h1 {
@@ -475,9 +566,14 @@
                 padding: 80px 0;
             }
 
+            .hero {
+                padding: 40px 0 80px;
+            }
+
             .hero .container {
                 grid-template-columns: 1fr 1fr;
                 gap: 60px;
+                text-align: left;
             }
 
             .features-list {
@@ -486,7 +582,7 @@
             }
 
             .quantity-options {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
 
             .footer-links {
@@ -527,8 +623,34 @@
                 <h1>For Business</h1>
                 <p>Custom magnets with your brand. Perfect for events, giveaways, or branded merchandise. One format, volume pricing, and consistent quality made in Copenhagen.</p>
             </div>
-            <div class="hero-image">
-                <img src="images/business-product.jpg" alt="Business custom magnet with logo in context">
+            <div class="image-gallery">
+                <div class="gallery-main">
+                    <img id="gallery-main-img" src="images/business-product-1.jpg" alt="Business custom magnet with logo">
+
+                    <div class="gallery-arrow gallery-arrow-left" onclick="changeImage(-1)">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </div>
+
+                    <div class="gallery-arrow gallery-arrow-right" onclick="changeImage(1)">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="gallery-thumbnails">
+                    <div class="gallery-thumb active" onclick="selectImage(0)">
+                        <img src="images/business-product-1.jpg" alt="Business magnet view 1">
+                    </div>
+                    <div class="gallery-thumb" onclick="selectImage(1)">
+                        <img src="images/business-product-2.jpg" alt="Business magnet view 2">
+                    </div>
+                    <div class="gallery-thumb" onclick="selectImage(2)">
+                        <img src="images/business-product-3.jpg" alt="Business magnet view 3">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -590,38 +712,32 @@
                 <div class="step-header">
                     <div class="step-number">Step 1</div>
                     <h2>Choose Quantity</h2>
-                    <p class="form-note">Button 50×50mm · Prices under review — will be confirmed when we receive your request</p>
+                    <p class="form-note">Button 50×50mm · Volume pricing</p>
                 </div>
 
                 <div class="quantity-options">
                     <div class="quantity-card" onclick="selectQuantity(25)">
                         <span class="number">25</span>
                         <span class="label">pieces</span>
-                        <span class="price">Price TBD</span>
+                        <span class="price">DKK 489</span>
                     </div>
 
                     <div class="quantity-card" onclick="selectQuantity(50)">
                         <span class="number">50</span>
                         <span class="label">pieces</span>
-                        <span class="price">Price TBD</span>
+                        <span class="price">DKK 875</span>
                     </div>
 
                     <div class="quantity-card" onclick="selectQuantity(100)">
                         <span class="number">100</span>
                         <span class="label">pieces</span>
-                        <span class="price">Price TBD</span>
+                        <span class="price">DKK 1.550</span>
                     </div>
 
                     <div class="quantity-card" onclick="selectQuantity(250)">
                         <span class="number">250</span>
                         <span class="label">pieces</span>
-                        <span class="price">Price TBD</span>
-                    </div>
-
-                    <div class="quantity-card" onclick="selectQuantity(500)">
-                        <span class="number">500</span>
-                        <span class="label">pieces</span>
-                        <span class="price">Price TBD</span>
+                        <span class="price">DKK 3.375</span>
                     </div>
                 </div>
             </div>
@@ -770,8 +886,62 @@
         const state = {
             quantity: 25,
             logoFile: null,
-            postalCode: ''
+            postalCode: '',
+            currentImageIndex: 0
         };
+
+        // Price table
+        const prices = {
+            25: 489,
+            50: 875,
+            100: 1550,
+            250: 3375
+        };
+
+        // ==================== IMAGE GALLERY ====================
+        const galleryImages = [
+            'images/business-product-1.jpg',
+            'images/business-product-2.jpg',
+            'images/business-product-3.jpg'
+        ];
+
+        function selectImage(index) {
+            state.currentImageIndex = index;
+            updateGalleryDisplay();
+        }
+
+        function changeImage(direction) {
+            state.currentImageIndex += direction;
+
+            // Loop around
+            if (state.currentImageIndex < 0) {
+                state.currentImageIndex = galleryImages.length - 1;
+            } else if (state.currentImageIndex >= galleryImages.length) {
+                state.currentImageIndex = 0;
+            }
+
+            updateGalleryDisplay();
+        }
+
+        function updateGalleryDisplay() {
+            // Update main image
+            const mainImg = document.getElementById('gallery-main-img');
+            mainImg.style.opacity = '0';
+
+            setTimeout(() => {
+                mainImg.src = galleryImages[state.currentImageIndex];
+                mainImg.style.opacity = '1';
+            }, 150);
+
+            // Update thumbnail active state
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, index) => {
+                if (index === state.currentImageIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
 
         // ==================== QUANTITY SELECTION ====================
         function selectQuantity(qty) {
@@ -860,10 +1030,12 @@
         // ==================== SUMMARY UPDATE ====================
         function updateSummary() {
             const logoText = state.logoFile ? '1 file uploaded' : 'No file uploaded';
+            const price = prices[state.quantity];
 
             document.querySelector('.summary-box .summary-row:nth-child(2) .value').textContent = `${state.quantity} pieces`;
             document.querySelector('.summary-box .summary-row:nth-child(3) .value').textContent = logoText;
             document.querySelector('.summary-box .summary-row:nth-child(4) .value').textContent = getDeliveryText();
+            document.querySelector('.summary-total .value').textContent = `DKK ${price.toLocaleString('da-DK')}`;
 
             // Update hidden form fields
             document.getElementById('form-quantity').value = state.quantity;

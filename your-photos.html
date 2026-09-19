@@ -179,6 +179,13 @@
             border-color: var(--burgundy);
         }
 
+        .combo-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
         .combo-card h3 {
             margin: 12px 0 6px;
             font-size: 14px;
@@ -195,11 +202,6 @@
             margin-bottom: 0;
         }
 
-        .step-section.pre-completed {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
         .step-header {
             margin-bottom: 32px;
         }
@@ -213,38 +215,6 @@
 
         .step-header h2 {
             margin-bottom: 8px;
-        }
-
-        .pre-selected-summary {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px;
-            background: var(--linen);
-            border-radius: 4px;
-            margin-top: 16px;
-        }
-
-        .pre-selected-summary .checkmark {
-            color: var(--burgundy);
-            font-size: 20px;
-        }
-
-        .pre-selected-summary .value {
-            flex: 1;
-            font-weight: 500;
-            color: var(--ink);
-        }
-
-        .change-link {
-            font-size: 13px;
-            color: var(--burgundy);
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .change-link:hover {
-            opacity: 0.8;
         }
 
         /* ==================== FORMAT & STYLE OPTIONS ==================== */
@@ -275,6 +245,13 @@
         .option-card .specs {
             font-size: 13px;
             color: var(--almond);
+        }
+
+        .option-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 4px;
         }
 
         /* ==================== QUANTITY ==================== */
@@ -523,6 +500,68 @@
             aspect-ratio: 1 / 1;
         }
 
+        /* ==================== PRODUCT CAROUSEL ==================== */
+        .product-carousel {
+            display: none; /* Hidden by default, shown only when combo parameter exists */
+            padding: 60px 0 40px;
+        }
+
+        .product-carousel.visible {
+            display: block;
+        }
+
+        .carousel-main-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--linen);
+        }
+
+        .carousel-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-thumbnails {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            justify-content: center;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .carousel-thumb {
+            flex: 1;
+            max-width: 150px;
+            aspect-ratio: 1 / 1;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .carousel-thumb:hover {
+            border-color: var(--almond);
+        }
+
+        .carousel-thumb.active {
+            border-color: var(--burgundy);
+        }
+
+        .carousel-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         /* ==================== RESPONSIVE ==================== */
         @media (min-width: 768px) {
             h1 {
@@ -590,6 +629,26 @@
         </div>
     </section>
 
+    <!-- ==================== PRODUCT CAROUSEL (only shown when combo parameter exists) ==================== -->
+    <section class="product-carousel" id="product-carousel">
+        <div class="container">
+            <div class="carousel-main-image">
+                <img id="carousel-main-img" src="" alt="Product image">
+            </div>
+            <div class="carousel-thumbnails">
+                <div class="carousel-thumb active" onclick="selectCarouselImage(0)">
+                    <img id="carousel-thumb-0" src="" alt="Product view 1">
+                </div>
+                <div class="carousel-thumb" onclick="selectCarouselImage(1)">
+                    <img id="carousel-thumb-1" src="" alt="Product view 2">
+                </div>
+                <div class="carousel-thumb" onclick="selectCarouselImage(2)">
+                    <img id="carousel-thumb-2" src="" alt="Product view 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ==================== START HERE ==================== -->
     <section class="start-here bg-linen">
         <div class="container">
@@ -597,28 +656,28 @@
             <p>Quick picks, zero decisions. Choose your pack and upload your photos.</p>
 
             <div class="start-here-grid">
-                <div class="combo-card" onclick="selectStartHerePackage('button', null, 8, 169)">
-                    <img src="images/start-here-01.jpg" alt="Button magnets 50×50mm pack of 8">
+                <div class="combo-card" onclick="selectStartHerePackage('button', null, 8, 189)">
+                    <img src="images/starthere-button-8pack-01.jpg" alt="Button magnets 50×50mm pack of 8">
                     <h3>Button · Pack of 8</h3>
-                    <span class="price">DKK 169</span>
+                    <span class="price">DKK 189</span>
                 </div>
 
-                <div class="combo-card" onclick="selectStartHerePackage('button', null, 4, 99)">
-                    <img src="images/start-here-02.jpg" alt="Button magnets 50×50mm pack of 4">
+                <div class="combo-card" onclick="selectStartHerePackage('button', null, 4, 119)">
+                    <img src="images/starthere-button-4pack-01.jpg" alt="Button magnets 50×50mm pack of 4">
                     <h3>Button · Pack of 4</h3>
-                    <span class="price">DKK 99</span>
+                    <span class="price">DKK 119</span>
                 </div>
 
                 <div class="combo-card" onclick="selectStartHerePackage('flat', 'frame', 12, 189)">
-                    <img src="images/start-here-03.jpg" alt="Flat Frame magnets 70×70mm pack of 12">
+                    <img src="images/starthere-flat-frame-12pack-01.jpg" alt="Flat Frame magnets 70×70mm pack of 12">
                     <h3>Flat Frame · Pack of 12</h3>
                     <span class="price">DKK 189</span>
                 </div>
 
-                <div class="combo-card" onclick="selectStartHerePackage('flat', 'polaroid', 12, 189)">
-                    <img src="images/start-here-04.jpg" alt="Flat Polaroid magnets 70×90mm pack of 12">
+                <div class="combo-card" onclick="selectStartHerePackage('flat', 'polaroid', 12, 229)">
+                    <img src="images/starthere-flat-polaroid-12pack-01.jpg" alt="Flat Polaroid magnets 70×90mm pack of 12">
                     <h3>Flat Polaroid · Pack of 12</h3>
-                    <span class="price">DKK 189</span>
+                    <span class="price">DKK 229</span>
                 </div>
             </div>
         </div>
@@ -695,19 +754,19 @@
                     <div class="quantity-card">
                         <span class="number">4</span>
                         <span class="label">pieces</span>
-                        <span class="price">DKK 99</span>
+                        <span class="price">DKK 119</span>
                     </div>
 
                     <div class="quantity-card">
                         <span class="number">8</span>
                         <span class="label">pieces</span>
-                        <span class="price">DKK 169</span>
+                        <span class="price">DKK 189</span>
                     </div>
 
                     <div class="quantity-card">
                         <span class="number">24</span>
                         <span class="label">pieces</span>
-                        <span class="price">DKK 399</span>
+                        <span class="price">DKK 525</span>
                     </div>
                 </div>
             </div>
@@ -860,16 +919,68 @@
         // Price tables
         const prices = {
             button: {
-                4: 99,
-                8: 169,
-                24: 399
+                4: 119,
+                8: 189,
+                24: 525
             },
-            flat: {
+            flatFrame: {
                 6: 149,
                 12: 189,
                 24: 349
+            },
+            flatPolaroid: {
+                6: 179,
+                12: 229,
+                24: 419
             }
         };
+
+        // ==================== PRODUCT CAROUSEL ====================
+        let currentCarouselIndex = 0;
+        let carouselImages = [];
+
+        function initCarousel(combo) {
+            // Build image paths for this combo
+            carouselImages = [
+                `images/starthere-${combo}-01.jpg`,
+                `images/starthere-${combo}-02.jpg`,
+                `images/starthere-${combo}-03.jpg`
+            ];
+
+            // Set main image and thumbnails
+            document.getElementById('carousel-main-img').src = carouselImages[0];
+            document.getElementById('carousel-thumb-0').src = carouselImages[0];
+            document.getElementById('carousel-thumb-1').src = carouselImages[1];
+            document.getElementById('carousel-thumb-2').src = carouselImages[2];
+
+            // Show carousel
+            document.getElementById('product-carousel').classList.add('visible');
+
+            // Set first thumbnail as active
+            currentCarouselIndex = 0;
+        }
+
+        function selectCarouselImage(index) {
+            currentCarouselIndex = index;
+
+            // Update main image with fade effect
+            const mainImg = document.getElementById('carousel-main-img');
+            mainImg.style.opacity = '0';
+
+            setTimeout(() => {
+                mainImg.src = carouselImages[index];
+                mainImg.style.opacity = '1';
+            }, 150);
+
+            // Update thumbnail active state
+            document.querySelectorAll('.carousel-thumb').forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
 
         // ==================== START HERE PRE-SELECTION ====================
         function selectStartHerePackage(format, style, quantity, price) {
@@ -882,9 +993,9 @@
             // Render pre-completed mode
             renderPreCompletedMode();
 
-            // Scroll to upload photos step
+            // Scroll to the beginning of "Or Build Your Pack" (Step 1)
             setTimeout(() => {
-                document.querySelector('.upload-photos').scrollIntoView({
+                document.querySelector('.build-pack').scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
@@ -894,109 +1005,65 @@
             updateSummary();
         }
 
-        function clearPreSelection() {
-            state.preSelected = false;
-            renderNormalMode();
-
-            // Scroll back to top of build section
-            document.querySelector('.build-pack').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
         function renderPreCompletedMode() {
-            // Format step
-            const formatSection = document.querySelector('.build-pack .step-section');
-            formatSection.classList.add('pre-completed');
+            // Mark the pre-selected format card as selected
+            const formatCards = document.querySelectorAll('.build-pack .option-card');
+            formatCards.forEach((card, index) => {
+                // Reset all cards first
+                card.style.borderColor = 'var(--almond)';
+                card.style.background = 'transparent';
 
-            const formatLabel = state.format === 'button' ? 'Button 50×50mm' : 'Flat';
-            formatSection.querySelector('.options-grid').style.display = 'none';
+                // Mark the selected one
+                if ((index === 0 && state.format === 'button') ||
+                    (index === 1 && state.format === 'flat')) {
+                    card.style.borderColor = 'var(--burgundy)';
+                    card.style.background = 'var(--linen)';
+                }
+            });
 
-            let summaryHTML = `
-                <div class="pre-selected-summary">
-                    <span class="checkmark">✓</span>
-                    <span class="value">${formatLabel}</span>
-                    <a class="change-link" onclick="clearPreSelection()">Change</a>
-                </div>
-            `;
-
-            if (formatSection.querySelector('.pre-selected-summary')) {
-                formatSection.querySelector('.pre-selected-summary').remove();
-            }
-            formatSection.querySelector('.step-header').insertAdjacentHTML('afterend', summaryHTML);
-
-            // Style step (only if flat)
+            // Show/hide style section based on format
             const styleSection = document.querySelector('.style-selection');
             if (state.format === 'flat') {
                 styleSection.style.display = 'block';
-                styleSection.querySelector('.step-section').classList.add('pre-completed');
-                styleSection.querySelector('.options-grid').style.display = 'none';
 
-                const styleLabel = state.style === 'frame' ? 'Frame 70×70mm' : 'Polaroid 70×90mm';
-                summaryHTML = `
-                    <div class="pre-selected-summary">
-                        <span class="checkmark">✓</span>
-                        <span class="value">${styleLabel}</span>
-                        <a class="change-link" onclick="clearPreSelection()">Change</a>
-                    </div>
-                `;
+                // Mark the pre-selected style card as selected
+                const styleCards = document.querySelectorAll('.style-selection .option-card');
+                styleCards.forEach((card, index) => {
+                    // Reset all cards first
+                    card.style.borderColor = 'var(--almond)';
+                    card.style.background = 'transparent';
 
-                if (styleSection.querySelector('.pre-selected-summary')) {
-                    styleSection.querySelector('.pre-selected-summary').remove();
-                }
-                styleSection.querySelector('.step-header').insertAdjacentHTML('afterend', summaryHTML);
+                    // Mark the selected one (use almond background for better contrast on linen section)
+                    if ((index === 0 && state.style === 'frame') ||
+                        (index === 1 && state.style === 'polaroid')) {
+                        card.style.borderColor = 'var(--burgundy)';
+                        card.style.background = 'var(--almond)';
+                    }
+                });
             } else {
                 styleSection.style.display = 'none';
             }
 
-            // Quantity step
-            const quantitySection = document.querySelector('.quantity-selection');
-            quantitySection.querySelector('.step-section').classList.add('pre-completed');
-            quantitySection.querySelector('.quantity-options').style.display = 'none';
-
-            summaryHTML = `
-                <div class="pre-selected-summary">
-                    <span class="checkmark">✓</span>
-                    <span class="value">Pack of ${state.quantity}</span>
-                    <a class="change-link" onclick="clearPreSelection()">Change</a>
-                </div>
-            `;
-
-            if (quantitySection.querySelector('.pre-selected-summary')) {
-                quantitySection.querySelector('.pre-selected-summary').remove();
-            }
-            quantitySection.querySelector('.step-header').insertAdjacentHTML('afterend', summaryHTML);
-        }
-
-        function renderNormalMode() {
-            // Format step
-            const formatSection = document.querySelector('.build-pack .step-section');
-            formatSection.classList.remove('pre-completed');
-            formatSection.querySelector('.options-grid').style.display = 'grid';
-            if (formatSection.querySelector('.pre-selected-summary')) {
-                formatSection.querySelector('.pre-selected-summary').remove();
-            }
-
-            // Style step
-            const styleSection = document.querySelector('.style-selection');
-            const styleStepSection = styleSection.querySelector('.step-section');
-            styleStepSection.classList.remove('pre-completed');
-            styleSection.querySelector('.options-grid').style.display = 'grid';
-            if (styleSection.querySelector('.pre-selected-summary')) {
-                styleSection.querySelector('.pre-selected-summary').remove();
-            }
-
-            // Quantity step
-            const quantitySection = document.querySelector('.quantity-selection');
-            quantitySection.querySelector('.step-section').classList.remove('pre-completed');
-            quantitySection.querySelector('.quantity-options').style.display = 'grid';
-            if (quantitySection.querySelector('.pre-selected-summary')) {
-                quantitySection.querySelector('.pre-selected-summary').remove();
-            }
-
-            // Update quantity options for default format
+            // Update quantity options for the selected format
             updateQuantityOptions();
+
+            // Mark the pre-selected quantity card as selected
+            setTimeout(() => {
+                const quantityCards = document.querySelectorAll('.quantity-card');
+                quantityCards.forEach(card => {
+                    const number = parseInt(card.querySelector('.number').textContent);
+
+                    // Reset all cards first
+                    card.style.borderColor = 'var(--almond)';
+                    card.style.background = 'transparent';
+
+                    // Mark the selected one
+                    if (number === state.quantity) {
+                        card.style.borderColor = 'var(--burgundy)';
+                        card.style.background = 'var(--linen)';
+                    }
+                });
+            }, 100);
         }
 
         // ==================== FORMAT SELECTION ====================
@@ -1034,7 +1101,7 @@
                 card.style.background = 'transparent';
             });
             event.currentTarget.style.borderColor = 'var(--burgundy)';
-            event.currentTarget.style.background = 'var(--linen)';
+            event.currentTarget.style.background = 'var(--almond)'; // Use almond for better contrast on linen background
 
             updateSummary();
         }
@@ -1045,7 +1112,10 @@
             const options = state.format === 'button' ? [4, 8, 24] : [6, 12, 24];
 
             quantityGrid.innerHTML = options.map(qty => {
-                const price = prices[state.format][qty];
+                // Get price table key based on format and style
+                const priceKey = state.format === 'button' ? 'button' :
+                               (state.style === 'frame' ? 'flatFrame' : 'flatPolaroid');
+                const price = prices[priceKey][qty];
                 return `
                     <div class="quantity-card" onclick="selectQuantity(${qty})">
                         <span class="number">${qty}</span>
@@ -1156,7 +1226,12 @@
         function updateSummary() {
             const formatText = state.format === 'button' ? 'Button 50×50mm' :
                               `Flat ${state.style === 'frame' ? 'Frame 70×70mm' : 'Polaroid 70×90mm'}`;
-            const price = prices[state.format][state.quantity];
+
+            // Get price table key based on format and style
+            const priceKey = state.format === 'button' ? 'button' :
+                           (state.style === 'frame' ? 'flatFrame' : 'flatPolaroid');
+            const price = prices[priceKey][state.quantity];
+
             const photosText = state.photos.length === 0 ? 'No photos uploaded' :
                               `${state.photos.length} uploaded`;
 
@@ -1227,15 +1302,25 @@
 
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize upload zone
-            updatePhotoPreview();
+            // Check for combo parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const combo = urlParams.get('combo');
 
-            // Set default selections
-            updateQuantityOptions();
-            updateSummary();
+            if (combo) {
+                // Parse combo parameter and pre-select
+                handleComboFromURL(combo);
+            } else {
+                // Normal initialization for manual flow
+                // Initialize upload zone
+                updatePhotoPreview();
 
-            // Hide style section by default (Button selected)
-            document.querySelector('.style-selection').style.display = 'none';
+                // Set default selections
+                updateQuantityOptions();
+                updateSummary();
+
+                // Hide style section by default (Button selected)
+                document.querySelector('.style-selection').style.display = 'none';
+            }
 
             // Attach postal code listener
             document.getElementById('postal-code').addEventListener('input', updatePostalCode);
@@ -1243,6 +1328,49 @@
             // Attach form submission
             document.getElementById('order-form').addEventListener('submit', handleFormSubmit);
         });
+
+        // ==================== HANDLE COMBO FROM URL ====================
+        function handleComboFromURL(combo) {
+            // Map combo parameter to format, style, quantity
+            const comboMap = {
+                'button-8pack': { format: 'button', style: null, quantity: 8 },
+                'button-4pack': { format: 'button', style: null, quantity: 4 },
+                'flat-frame-12pack': { format: 'flat', style: 'frame', quantity: 12 },
+                'flat-polaroid-12pack': { format: 'flat', style: 'polaroid', quantity: 12 }
+            };
+
+            const comboData = comboMap[combo];
+
+            if (comboData) {
+                // Get the price for this combo
+                const priceMap = {
+                    'button-8pack': 189,
+                    'button-4pack': 119,
+                    'flat-frame-12pack': 189,
+                    'flat-polaroid-12pack': 229
+                };
+
+                // Initialize product carousel with this combo's images
+                initCarousel(combo);
+
+                // Initialize upload zone (needed before calling selectStartHerePackage)
+                updatePhotoPreview();
+
+                // Call existing pre-selection function
+                selectStartHerePackage(
+                    comboData.format,
+                    comboData.style,
+                    comboData.quantity,
+                    priceMap[combo]
+                );
+            } else {
+                // Invalid combo, fall back to normal flow
+                updatePhotoPreview();
+                updateQuantityOptions();
+                updateSummary();
+                document.querySelector('.style-selection').style.display = 'none';
+            }
+        }
     </script>
 
 </body>

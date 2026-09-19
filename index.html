@@ -160,28 +160,79 @@
         .hero {
             position: relative;
             background: var(--off-white);
-            overflow: visible;
+            overflow: hidden;
+            height: 500px;
+            padding: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(26,22,20,0.55) 0%, rgba(26,22,20,0.15) 40%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .hero-image {
             width: 100%;
-            height: 500px;
-            position: relative;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
             display: block;
         }
 
-        .hero h1 {
+        .hero-content {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            left: 20px;
+            transform: translateY(-50%);
             z-index: 10;
-            text-align: center;
-            color: var(--burgundy);
-            background: rgba(252, 251, 249, 0.9);
-            padding: 24px 40px;
-            border-radius: 8px;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 52px;
+            line-height: 1.1;
+            text-align: left;
+            color: var(--off-white);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .nowrap {
             white-space: nowrap;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--off-white);
+            opacity: 0.85;
+            margin-bottom: 28px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--off-white);
+            color: var(--burgundy);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .hero-cta:hover {
+            opacity: 0.9;
         }
 
         .hero .placeholder-ratio-16-9 {
@@ -198,6 +249,7 @@
             padding: 40px 20px;
             background: var(--off-white);
             border-bottom: 1px solid var(--linen);
+            margin: 0;
         }
 
         .trust-item {
@@ -231,22 +283,21 @@
             margin-bottom: 8px;
         }
 
-        .start-here > p {
-            margin-bottom: 32px;
-        }
-
         .start-here-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
-            margin-bottom: 32px;
+            margin-top: 48px;
         }
 
         .combo-card {
+            display: block;
             background: var(--off-white);
             border: 1px solid var(--almond);
             padding: 16px;
             text-align: center;
+            text-decoration: none;
+            color: inherit;
             transition: border-color 0.2s;
         }
 
@@ -254,15 +305,38 @@
             border-color: var(--burgundy);
         }
 
+        .combo-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
         .combo-card h3 {
             margin: 12px 0 6px;
             font-size: 16px;
+            color: var(--ink);
         }
 
         .combo-card .price {
             display: block;
             margin-top: 6px;
+            margin-bottom: 12px;
             font-size: 13px;
+            color: var(--almond);
+        }
+
+        .combo-card-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--burgundy);
+            text-decoration: underline;
+            transition: opacity 0.2s;
+        }
+
+        .combo-card-link:hover {
+            opacity: 0.8;
         }
 
         .btn-primary {
@@ -308,6 +382,13 @@
 
         .editorial-image {
             width: 100%;
+        }
+
+        .editorial-image img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         .editorial-content h3 {
@@ -366,7 +447,7 @@
 
         /* ==================== CONTACT ==================== */
         .contact {
-            background: var(--ink);
+            background: var(--burgundy);
             color: var(--off-white);
         }
 
@@ -523,8 +604,12 @@
                 padding: 80px 0;
             }
 
-            .hero-image {
+            .hero {
                 height: 600px;
+            }
+
+            .hero h1 {
+                font-size: 60px;
             }
 
             .trust-icons {
@@ -555,6 +640,13 @@
                 flex-direction: row;
                 justify-content: center;
                 gap: 32px;
+            }
+        }
+
+        /* Align hero-content with centered container on large screens */
+        @media (min-width: 1240px) {
+            .hero-content {
+                left: calc((100vw - 1200px) / 2 + 20px);
             }
         }
     </style>
@@ -594,9 +686,11 @@
 
     <!-- ==================== HERO ==================== -->
     <section class="hero">
-        <h1>Your Favourite Moments,<br>Made to Last</h1>
-        <div class="hero-image">
-            <img src="images/hero-home.jpg" alt="MINNK custom photo magnets on warm surface">
+        <img class="hero-image" src="images/hero-home.jpg" alt="MINNK custom photo magnets on warm surface">
+        <div class="hero-content">
+            <h1><span class="nowrap">Your photos. Your places. Your business.</span><br>All made to last.</h1>
+            <p class="hero-subtitle">Custom photo magnets designed and printed in Copenhagen</p>
+            <a href="your-photos.html" class="hero-cta">Shop Your Photos</a>
         </div>
     </section>
 
@@ -638,32 +732,34 @@
             <p>Quick picks, zero decisions. Choose your pack and upload your photos.</p>
 
             <div class="start-here-grid">
-                <div class="combo-card">
-                    <img src="images/start-here-01.jpg" alt="Button magnets 50×50mm pack of 8">
+                <a href="your-photos.html?combo=button-8pack" class="combo-card">
+                    <img src="images/starthere-button-8pack-01.jpg" alt="Button magnets 50×50mm pack of 8">
                     <h3>Button · Pack of 8</h3>
-                    <span class="price">DKK 169</span>
-                </div>
+                    <span class="price">DKK 189</span>
+                    <span class="combo-card-link">View Product</span>
+                </a>
 
-                <div class="combo-card">
-                    <img src="images/start-here-02.jpg" alt="Button magnets 50×50mm pack of 4">
+                <a href="your-photos.html?combo=button-4pack" class="combo-card">
+                    <img src="images/starthere-button-4pack-01.jpg" alt="Button magnets 50×50mm pack of 4">
                     <h3>Button · Pack of 4</h3>
-                    <span class="price">DKK 99</span>
-                </div>
+                    <span class="price">DKK 119</span>
+                    <span class="combo-card-link">View Product</span>
+                </a>
 
-                <div class="combo-card">
-                    <img src="images/start-here-03.jpg" alt="Flat Frame magnets 70×70mm pack of 12">
+                <a href="your-photos.html?combo=flat-frame-12pack" class="combo-card">
+                    <img src="images/starthere-flat-frame-12pack-01.jpg" alt="Flat Frame magnets 70×70mm pack of 12">
                     <h3>Flat Frame · Pack of 12</h3>
                     <span class="price">DKK 189</span>
-                </div>
+                    <span class="combo-card-link">View Product</span>
+                </a>
 
-                <div class="combo-card">
-                    <img src="images/start-here-04.jpg" alt="Flat Polaroid magnets 70×90mm pack of 12">
+                <a href="your-photos.html?combo=flat-polaroid-12pack" class="combo-card">
+                    <img src="images/starthere-flat-polaroid-12pack-01.jpg" alt="Flat Polaroid magnets 70×90mm pack of 12">
                     <h3>Flat Polaroid · Pack of 12</h3>
-                    <span class="price">DKK 189</span>
-                </div>
+                    <span class="price">DKK 229</span>
+                    <span class="combo-card-link">View Product</span>
+                </a>
             </div>
-
-            <a href="your-photos.html" class="btn-primary">Explore Your Photos</a>
         </div>
     </section>
 
@@ -672,23 +768,12 @@
         <div class="container">
             <div class="editorial-block">
                 <div class="editorial-image">
-                    <img src="images/line-your-photos.jpg" alt="Custom photo magnet detail">
+                    <img src="images/line-yourphotos.jpg" alt="Custom photo magnet detail">
                 </div>
                 <div class="editorial-content">
                     <h3>Your Photos</h3>
                     <p>Turn your moments into magnets</p>
                     <a href="your-photos.html" class="btn-primary">Explore Your Photos</a>
-                </div>
-            </div>
-
-            <div class="editorial-block">
-                <div class="editorial-image">
-                    <img src="images/line-collections.jpg" alt="MINNK Collections pack">
-                </div>
-                <div class="editorial-content">
-                    <h3>Collections</h3>
-                    <p>Curated sets designed by MINNK</p>
-                    <a href="collections.html" class="btn-primary">Explore Collections</a>
                 </div>
             </div>
 
@@ -700,6 +785,17 @@
                     <h3>For Business</h3>
                     <p>Custom magnets with your brand</p>
                     <a href="for-business.html" class="btn-primary">Explore For Business</a>
+                </div>
+            </div>
+
+            <div class="editorial-block">
+                <div class="editorial-image">
+                    <img src="images/line-collections.jpg" alt="MINNK Collections pack">
+                </div>
+                <div class="editorial-content">
+                    <h3>Collections</h3>
+                    <p>Curated sets designed by MINNK</p>
+                    <a href="collections.html" class="btn-primary">Explore Collections</a>
                 </div>
             </div>
         </div>

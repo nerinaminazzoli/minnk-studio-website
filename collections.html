@@ -143,11 +143,14 @@
         }
 
         /* ==================== COLLECTIONS GRID ==================== */
+        .collections-section {
+            padding-top: 0;
+        }
+
         .collections-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 40px;
-            margin-top: 40px;
         }
 
         .collection-card {
@@ -164,6 +167,55 @@
         .collection-image {
             aspect-ratio: 1 / 1;
             background: var(--off-white);
+            overflow: hidden;
+        }
+
+        .collection-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .collection-carousel {
+            position: relative;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: rgba(252, 251, 249, 0.95);
+            border: 1px solid var(--almond);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            z-index: 5;
+        }
+
+        .carousel-arrow:hover {
+            background: var(--off-white);
+            border-color: var(--burgundy);
+        }
+
+        .carousel-arrow-left {
+            left: 12px;
+        }
+
+        .carousel-arrow-right {
+            right: 12px;
+        }
+
+        .carousel-arrow svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--burgundy);
+            stroke-width: 2.5;
+            fill: none;
         }
 
         .collection-content {
@@ -172,6 +224,14 @@
 
         .collection-content h3 {
             margin-bottom: 8px;
+        }
+
+        .collection-price {
+            display: block;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--almond);
+            margin-bottom: 12px;
         }
 
         .collection-content p {
@@ -496,11 +556,24 @@
 
                 <!-- TRACING CARD -->
                 <div class="collection-card">
-                    <div class="collection-image">
-                        <img src="images/tracing-pack.jpg" alt="Tracing collection letter magnets pack">
+                    <div class="collection-image collection-carousel">
+                        <img id="tracing-carousel-img" src="images/tracing-pack-1.jpg" alt="Tracing collection letter magnets pack">
+
+                        <div class="carousel-arrow carousel-arrow-left" onclick="changeTracingImage(-1)">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="carousel-arrow carousel-arrow-right" onclick="changeTracingImage(1)">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </div>
                     <div class="collection-content">
                         <h3>Tracing</h3>
+                        <span class="collection-price">From DKK 95</span>
                         <p>Spell it out. Button magnets with one letter each — your name, theirs, a word that matters.</p>
                         <button class="btn-primary" onclick="openModal('tracing')">Customize</button>
                     </div>
@@ -508,13 +581,51 @@
 
                 <!-- PLACES CARD -->
                 <div class="collection-card">
-                    <div class="collection-image">
-                        <img src="images/places-pack.jpg" alt="Places collection Copenhagen landmarks pack">
+                    <div class="collection-image collection-carousel">
+                        <img id="places-carousel-img" src="images/places-pack-1.jpg" alt="Places collection Copenhagen landmarks pack">
+
+                        <div class="carousel-arrow carousel-arrow-left" onclick="changePlacesImage(-1)">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="carousel-arrow carousel-arrow-right" onclick="changePlacesImage(1)">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </div>
                     <div class="collection-content">
                         <h3>Places</h3>
+                        <span class="collection-price">DKK 85</span>
                         <p>Four landmarks, one country. Button magnet sets designed for the places that shaped you.</p>
                         <button class="btn-primary" onclick="openModal('places')">Order</button>
+                    </div>
+                </div>
+
+                <!-- NOTES CARD -->
+                <div class="collection-card">
+                    <div class="collection-image collection-carousel">
+                        <img id="notes-carousel-img" src="images/notes-pack-1.jpg" alt="Notes collection button magnets">
+
+                        <div class="carousel-arrow carousel-arrow-left" onclick="changeNotesImage(-1)">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="carousel-arrow carousel-arrow-right" onclick="changeNotesImage(1)">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="collection-content">
+                        <h3>Notes</h3>
+                        <span class="collection-price">DKK 85</span>
+                        <p>Say it plain. Button magnets for the things you don't want to lose track of.</p>
+                        <button class="btn-primary" onclick="openModal('notes')">Order</button>
                     </div>
                 </div>
 
@@ -604,7 +715,7 @@
             <form class="order-form" id="places-form" onsubmit="handlePlacesSubmit(event)">
                 <input type="hidden" name="form_type" value="places">
                 <input type="hidden" name="product" value="Places · 4x Button 50×50mm">
-                <input type="hidden" name="price" value="Price TBD">
+                <input type="hidden" name="price" value="85">
 
                 <div class="form-group">
                     <label for="places-country">Country</label>
@@ -625,7 +736,7 @@
                     </select>
                 </div>
 
-                <div class="price-display">Price TBD · Under review</div>
+                <div class="price-display">DKK 85 per pack</div>
 
                 <div class="form-group">
                     <label for="places-customer-name">Your Name</label>
@@ -660,6 +771,73 @@
                 <div class="form-group">
                     <label for="places-notes">Notes <span class="optional">(optional)</span></label>
                     <textarea id="places-notes" name="notes" placeholder="Special occasion, deadline..."></textarea>
+                </div>
+
+                <div class="important-note">
+                    <strong>This is a request.</strong> We'll review it and confirm pricing before any payment.
+                </div>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== NOTES MODAL ==================== -->
+    <div class="modal" id="modal-notes" onclick="closeModalOnOutside(event, 'notes')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('notes')">&times;</button>
+            <h2>Notes</h2>
+
+            <form class="order-form" id="notes-form" onsubmit="handleNotesSubmit(event)">
+                <input type="hidden" name="form_type" value="notes">
+                <input type="hidden" name="product" value="Notes · Button 50×50mm">
+                <input type="hidden" name="price" value="Price TBD">
+
+                <div class="form-group">
+                    <label for="notes-quantity">Quantity</label>
+                    <select id="notes-quantity" name="quantity" required>
+                        <option value="1">1 pack</option>
+                        <option value="2">2 packs</option>
+                        <option value="3">3 packs</option>
+                        <option value="5">5 packs</option>
+                    </select>
+                </div>
+
+                <div class="price-display">Price TBD · Under review</div>
+
+                <div class="form-group">
+                    <label for="notes-customer-name">Your Name</label>
+                    <input type="text" id="notes-customer-name" name="customer_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes-email">Email</label>
+                    <input type="email" id="notes-email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes-phone">Phone</label>
+                    <input type="tel" id="notes-phone" name="phone" placeholder="+45..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes-contact-preference">Preferred contact method</label>
+                    <select id="notes-contact-preference" name="contact_preference" required>
+                        <option value="">Select one</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes-postal-code">Postal Code</label>
+                    <input type="text" id="notes-postal-code" name="postal_code" required>
+                    <p class="form-note">Free delivery in Copenhagen</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes-notes">Notes <span class="optional">(optional)</span></label>
+                    <textarea id="notes-notes" name="notes" placeholder="Special occasion, deadline..."></textarea>
                 </div>
 
                 <div class="important-note">
@@ -745,6 +923,72 @@
         function handlePlacesSubmit(event) {
             event.preventDefault();
             submitForm(event.target, 'Places');
+        }
+
+        function handleNotesSubmit(event) {
+            event.preventDefault();
+            submitForm(event.target, 'Notes');
+        }
+
+        // ==================== TRACING CAROUSEL ====================
+        let tracingImageIndex = 0;
+        const tracingImages = [
+            'images/tracing-pack-1.jpg',
+            'images/tracing-pack-2.jpg'
+        ];
+
+        function changeTracingImage(direction) {
+            tracingImageIndex += direction;
+
+            // Loop around
+            if (tracingImageIndex < 0) {
+                tracingImageIndex = tracingImages.length - 1;
+            } else if (tracingImageIndex >= tracingImages.length) {
+                tracingImageIndex = 0;
+            }
+
+            document.getElementById('tracing-carousel-img').src = tracingImages[tracingImageIndex];
+        }
+
+        // ==================== NOTES CAROUSEL ====================
+        let notesImageIndex = 0;
+        const notesImages = [
+            'images/notes-pack-1.jpg',
+            'images/notes-pack-2.jpg'
+        ];
+
+        function changeNotesImage(direction) {
+            notesImageIndex += direction;
+
+            // Loop around
+            if (notesImageIndex < 0) {
+                notesImageIndex = notesImages.length - 1;
+            } else if (notesImageIndex >= notesImages.length) {
+                notesImageIndex = 0;
+            }
+
+            document.getElementById('notes-carousel-img').src = notesImages[notesImageIndex];
+        }
+
+        // ==================== PLACES CAROUSEL ====================
+        let placesImageIndex = 0;
+        const placesImages = [
+            'images/places-pack-1.jpg',
+            'images/places-pack-2.jpg',
+            'images/places-pack-3.jpg'
+        ];
+
+        function changePlacesImage(direction) {
+            placesImageIndex += direction;
+
+            // Loop around
+            if (placesImageIndex < 0) {
+                placesImageIndex = placesImages.length - 1;
+            } else if (placesImageIndex >= placesImages.length) {
+                placesImageIndex = 0;
+            }
+
+            document.getElementById('places-carousel-img').src = placesImages[placesImageIndex];
         }
 
         function submitForm(form, productType) {

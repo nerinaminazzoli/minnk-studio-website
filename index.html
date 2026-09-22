@@ -103,6 +103,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 20px;
+            width: 100%;
         }
 
         .logo img {
@@ -163,7 +164,7 @@
 
         /* Hide desktop nav in mobile */
         header nav {
-            display: none;
+            display: none !important;
         }
 
         /* Mobile menu overlay */
@@ -439,18 +440,14 @@
         }
 
         /* ==================== EDITORIAL BLOCKS ==================== */
-        .editorial-blocks {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+        .editorial-section {
             padding: 60px 0;
         }
 
         .editorial-block {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            align-items: center;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
         .editorial-image {
@@ -459,7 +456,7 @@
 
         .editorial-image img {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 3 / 2;
             object-fit: cover;
             border-radius: 8px;
         }
@@ -713,15 +710,19 @@
                 gap: 20px;
             }
 
-            .editorial-blocks {
-                grid-template-columns: 1fr;
-                gap: 80px;
+            .editorial-section {
                 padding: 100px 0;
             }
 
             .editorial-block {
+                display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 60px;
+                align-items: center;
+            }
+
+            .editorial-image img {
+                aspect-ratio: 1 / 1;
             }
 
             .editorial-content h3 {
@@ -893,7 +894,7 @@
     </section>
 
     <!-- ==================== EDITORIAL BLOCKS ==================== -->
-    <section class="editorial-blocks">
+    <section class="editorial-section">
         <div class="container">
             <div class="editorial-block">
                 <div class="editorial-image">
@@ -905,7 +906,11 @@
                     <a href="your-photos.html" class="btn-primary">Explore Your Photos</a>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <section class="editorial-section bg-linen">
+        <div class="container">
             <div class="editorial-block">
                 <div class="editorial-image">
                     <img src="images/line-collections.jpg" alt="MINNK Collections pack">
@@ -916,7 +921,11 @@
                     <a href="collections.html" class="btn-primary">Explore Collections</a>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <section class="editorial-section">
+        <div class="container">
             <div class="editorial-block">
                 <div class="editorial-image">
                     <img src="images/line-business.jpg" alt="Business magnet with logo in context">

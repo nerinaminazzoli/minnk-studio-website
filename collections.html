@@ -15,6 +15,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
 
+    <!-- WhatsApp Button -->
+    <link rel="stylesheet" href="css/whatsapp-button.css">
+
     <style>
         /* ==================== VARIABLES ==================== */
         :root {
@@ -384,6 +387,7 @@
             font-family: var(--font-body);
             font-size: 15px;
             border: 1px solid var(--almond);
+            border-radius: 4px;
             background: var(--off-white);
             color: var(--ink);
         }
@@ -416,6 +420,7 @@
             background: var(--ink);
             color: var(--off-white);
             border: none;
+            border-radius: 4px;
             cursor: pointer;
             transition: opacity 0.2s;
         }
@@ -528,6 +533,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="css/order-form.css">
 </head>
 <body>
 
@@ -555,7 +561,7 @@
     <section class="page-intro">
         <div class="container">
             <h1>Collections</h1>
-            <p>MINNK designs, not just prints. Curated sets that work straight out of the box — no photo needed, just choose and order.</p>
+            <p>MINNK designs, not just prints. Curated sets that work straight out of the box. No photo needed, just choose and order.</p>
         </div>
     </section>
 
@@ -584,7 +590,7 @@
                     <div class="collection-content">
                         <h3>Tracing</h3>
                         <span class="collection-price">From DKK 95</span>
-                        <p>Spell it out. Button magnets with one letter each — your name, theirs, a word that matters.</p>
+                        <p>Spell it out. Button magnets with one letter each: your name, theirs, a word that matters.</p>
                         <button class="btn-primary" onclick="openModal('tracing')">Customize</button>
                     </div>
                 </div>
@@ -649,7 +655,7 @@
             <button class="modal-close" onclick="closeModal('tracing')">&times;</button>
             <h2>Tracing</h2>
 
-            <div class="text-input-group">
+            <div class="text-input-group" data-hide-on-success>
                 <input
                     type="text"
                     class="name-input"
@@ -665,7 +671,7 @@
                 <div class="price-display" id="tracing-price">DKK 95</div>
             </div>
 
-            <form class="order-form" id="tracing-form" onsubmit="handleTracingSubmit(event)">
+            <form class="order-form" id="tracing-form" data-minnk-order data-source="collections" data-send-mode="none">
                 <input type="hidden" name="form_type" value="tracing">
                 <input type="hidden" id="tracing-name-hidden" name="custom_name" value="">
                 <input type="hidden" id="tracing-letters-hidden" name="letters" value="0">
@@ -674,7 +680,7 @@
 
                 <div class="form-group">
                     <label for="tracing-customer-name">Your Name</label>
-                    <input type="text" id="tracing-customer-name" name="customer_name" required>
+                    <input type="text" id="tracing-customer-name" name="name" required>
                 </div>
 
                 <div class="form-group">
@@ -683,17 +689,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="tracing-phone">Phone</label>
-                    <input type="tel" id="tracing-phone" name="phone" placeholder="+45..." required>
+                    <label>How would you like us to contact you?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="contact_method" value="whatsapp" required>
+                            <span class="radio-label">WhatsApp</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="contact_method" value="email" required>
+                            <span class="radio-label">Email</span>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="tracing-contact-preference">Preferred contact method</label>
-                    <select id="tracing-contact-preference" name="contact_preference" required>
-                        <option value="">Select one</option>
-                        <option value="email">Email</option>
-                        <option value="phone">Phone</option>
-                    </select>
+                <div class="form-group" data-phone-field style="display: none;">
+                    <label for="tracing-phone">WhatsApp number</label>
+                    <input type="tel" id="tracing-phone" name="phone" placeholder="+45...">
                 </div>
 
                 <div class="form-group">
@@ -722,12 +733,12 @@
             <button class="modal-close" onclick="closeModal('places')">&times;</button>
             <h2>Places</h2>
 
-            <form class="order-form" id="places-form" onsubmit="handlePlacesSubmit(event)">
+            <form class="order-form" id="places-form" data-minnk-order data-source="collections" data-send-mode="none">
                 <input type="hidden" name="form_type" value="places">
                 <input type="hidden" name="product" value="Places · 4x Button 50×50mm">
                 <input type="hidden" name="price" value="85">
 
-                <div class="form-group">
+                <div class="form-group" data-hide-on-success>
                     <label for="places-country">Country</label>
                     <select id="places-country" name="country" required>
                         <option value="">Select country</option>
@@ -736,7 +747,7 @@
                     <p class="form-note">More countries coming soon</p>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" data-hide-on-success>
                     <label for="places-quantity">Quantity</label>
                     <select id="places-quantity" name="quantity" required>
                         <option value="1">1 pack (4 magnets)</option>
@@ -746,11 +757,11 @@
                     </select>
                 </div>
 
-                <div class="price-display">DKK 85 per pack</div>
+                <div class="price-display" data-hide-on-success>DKK 85 per pack</div>
 
                 <div class="form-group">
                     <label for="places-customer-name">Your Name</label>
-                    <input type="text" id="places-customer-name" name="customer_name" required>
+                    <input type="text" id="places-customer-name" name="name" required>
                 </div>
 
                 <div class="form-group">
@@ -759,17 +770,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="places-phone">Phone</label>
-                    <input type="tel" id="places-phone" name="phone" placeholder="+45..." required>
+                    <label>How would you like us to contact you?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="contact_method" value="whatsapp" required>
+                            <span class="radio-label">WhatsApp</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="contact_method" value="email" required>
+                            <span class="radio-label">Email</span>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="places-contact-preference">Preferred contact method</label>
-                    <select id="places-contact-preference" name="contact_preference" required>
-                        <option value="">Select one</option>
-                        <option value="email">Email</option>
-                        <option value="phone">Phone</option>
-                    </select>
+                <div class="form-group" data-phone-field style="display: none;">
+                    <label for="places-phone">WhatsApp number</label>
+                    <input type="tel" id="places-phone" name="phone" placeholder="+45...">
                 </div>
 
                 <div class="form-group">
@@ -784,7 +800,7 @@
                 </div>
 
                 <div class="important-note">
-                    <strong>This is a request.</strong> We'll review it and confirm pricing before any payment.
+                    <strong>This is a request.</strong> We'll review it and confirm before any payment.
                 </div>
 
                 <button type="submit">Submit Request</button>
@@ -798,26 +814,26 @@
             <button class="modal-close" onclick="closeModal('notes')">&times;</button>
             <h2>Notes</h2>
 
-            <form class="order-form" id="notes-form" onsubmit="handleNotesSubmit(event)">
+            <form class="order-form" id="notes-form" data-minnk-order data-source="collections" data-send-mode="none">
                 <input type="hidden" name="form_type" value="notes">
-                <input type="hidden" name="product" value="Notes · Button 50×50mm">
-                <input type="hidden" name="price" value="Price TBD">
+                <input type="hidden" name="product" value="Notes · 4x Button 50×50mm">
+                <input type="hidden" name="price" value="85">
 
-                <div class="form-group">
+                <div class="form-group" data-hide-on-success>
                     <label for="notes-quantity">Quantity</label>
                     <select id="notes-quantity" name="quantity" required>
-                        <option value="1">1 pack</option>
-                        <option value="2">2 packs</option>
-                        <option value="3">3 packs</option>
-                        <option value="5">5 packs</option>
+                        <option value="1">1 pack (4 magnets)</option>
+                        <option value="2">2 packs (8 magnets)</option>
+                        <option value="3">3 packs (12 magnets)</option>
+                        <option value="5">5 packs (20 magnets)</option>
                     </select>
                 </div>
 
-                <div class="price-display">Price TBD · Under review</div>
+                <div class="price-display" data-hide-on-success>DKK 85 per pack</div>
 
                 <div class="form-group">
                     <label for="notes-customer-name">Your Name</label>
-                    <input type="text" id="notes-customer-name" name="customer_name" required>
+                    <input type="text" id="notes-customer-name" name="name" required>
                 </div>
 
                 <div class="form-group">
@@ -826,17 +842,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="notes-phone">Phone</label>
-                    <input type="tel" id="notes-phone" name="phone" placeholder="+45..." required>
+                    <label>How would you like us to contact you?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="contact_method" value="whatsapp" required>
+                            <span class="radio-label">WhatsApp</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="contact_method" value="email" required>
+                            <span class="radio-label">Email</span>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="notes-contact-preference">Preferred contact method</label>
-                    <select id="notes-contact-preference" name="contact_preference" required>
-                        <option value="">Select one</option>
-                        <option value="email">Email</option>
-                        <option value="phone">Phone</option>
-                    </select>
+                <div class="form-group" data-phone-field style="display: none;">
+                    <label for="notes-phone">WhatsApp number</label>
+                    <input type="tel" id="notes-phone" name="phone" placeholder="+45...">
                 </div>
 
                 <div class="form-group">
@@ -851,7 +872,7 @@
                 </div>
 
                 <div class="important-note">
-                    <strong>This is a request.</strong> We'll review it and confirm pricing before any payment.
+                    <strong>This is a request.</strong> We'll review it and confirm before any payment.
                 </div>
 
                 <button type="submit">Submit Request</button>
@@ -918,27 +939,6 @@
         }
 
         // ==================== FORM SUBMISSIONS ====================
-        function handleTracingSubmit(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('tracing-input').value.trim();
-            if (name.length === 0) {
-                alert('Please enter a name to spell out.');
-                return;
-            }
-
-            submitForm(event.target, 'Tracing');
-        }
-
-        function handlePlacesSubmit(event) {
-            event.preventDefault();
-            submitForm(event.target, 'Places');
-        }
-
-        function handleNotesSubmit(event) {
-            event.preventDefault();
-            submitForm(event.target, 'Notes');
-        }
 
         // ==================== TRACING CAROUSEL ====================
         let tracingImageIndex = 0;
@@ -1001,42 +1001,19 @@
             document.getElementById('places-carousel-img').src = placesImages[placesImageIndex];
         }
 
-        function submitForm(form, productType) {
-            const formData = new FormData(form);
-
-            fetch('https://formspree.io/f/xqegqgzb', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show confirmation
-                    const modalId = productType.toLowerCase();
-                    document.getElementById(`modal-${modalId}`).querySelector('.modal-content').innerHTML = `
-                        <div style="text-align:center; padding:40px 20px;">
-                            <h2 style="color:var(--burgundy); margin-bottom:12px;">Request Received!</h2>
-                            <p style="font-size:15px; color:var(--ink);">
-                                Thank you! We've received your ${productType} request.
-                                You'll receive confirmation before any payment.
-                            </p>
-                            <p style="font-size:14px; color:var(--stone); margin-top:12px;">
-                                We'll contact you at <strong>${formData.get('email')}</strong>
-                            </p>
-                            <a href="index.html" style="display:inline-block; margin-top:24px; padding:12px 24px; background:var(--ink); color:var(--off-white); text-decoration:none; border-radius:4px; font-size:13px;">Back to Home</a>
-                        </div>
-                    `;
-                } else {
-                    alert('There was a problem submitting your request. Please try again or contact us directly.');
-                }
-            })
-            .catch(error => {
-                alert('There was a problem submitting your request. Please try again or contact us directly.');
-            });
-        }
     </script>
+    <script src="js/order-form.js"></script>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/4591118494?text=Hi%20MINNK!%20I%20have%20a%20question%3A"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener"
+       aria-label="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
 
 </body>
 </html>

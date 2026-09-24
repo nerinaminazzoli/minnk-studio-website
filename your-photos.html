@@ -15,6 +15,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
 
+    <!-- WhatsApp Button -->
+    <link rel="stylesheet" href="css/whatsapp-button.css">
+
     <style>
         /* ==================== VARIABLES ==================== */
         :root {
@@ -229,6 +232,7 @@
 
         .option-card {
             border: 2px solid var(--almond);
+            border-radius: 4px;
             padding: 16px;
             text-align: center;
             cursor: pointer;
@@ -269,6 +273,7 @@
 
         .quantity-card {
             border: 2px solid var(--almond);
+            border-radius: 4px;
             padding: 24px 16px;
             text-align: center;
             cursor: pointer;
@@ -299,36 +304,6 @@
         }
 
         /* ==================== PHOTO UPLOAD ==================== */
-        .upload-zone {
-            margin-top: 32px;
-            border: 3px dashed var(--almond);
-            padding: 60px 20px;
-            text-align: center;
-            background: var(--linen);
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .upload-zone:hover {
-            border-color: var(--burgundy);
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            color: var(--almond);
-            margin-bottom: 16px;
-        }
-
-        .upload-zone h3 {
-            margin-bottom: 8px;
-        }
-
-        .upload-instructions {
-            font-size: 13px;
-            color: var(--stone);
-            margin-top: 12px;
-        }
-
         /* ==================== FORM ==================== */
         .order-form {
             margin-top: 32px;
@@ -359,6 +334,7 @@
             font-family: var(--font-body);
             font-size: 15px;
             border: 1px solid var(--almond);
+            border-radius: 4px;
             background: var(--off-white);
             color: var(--ink);
         }
@@ -385,6 +361,7 @@
             padding: 32px;
             background: var(--linen);
             border: 1px solid var(--almond);
+            border-radius: 4px;
         }
 
         .summary-row {
@@ -439,6 +416,7 @@
             background: var(--ink);
             color: var(--off-white);
             border: none;
+            border-radius: 4px;
             cursor: pointer;
             transition: opacity 0.2s;
         }
@@ -611,6 +589,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="css/order-form.css">
 </head>
 <body>
 
@@ -666,7 +645,7 @@
     <section class="start-here bg-linen">
         <div class="container">
             <h2>Start Here</h2>
-            <p>Quick picks, zero decisions. Choose your pack and upload your photos.</p>
+            <p>Quick picks, zero decisions. Choose your pack, then send us your photos.</p>
 
             <div class="start-here-grid">
                 <div class="combo-card" onclick="selectStartHerePackage('button', null, 8, 189)">
@@ -700,7 +679,7 @@
     <section class="build-pack bg-off-white">
         <div class="container">
             <h2>Or Build Your Pack</h2>
-            <p>Choose format, quantity, and upload your photos step by step.</p>
+            <p>Choose your format and quantity step by step, then send us your photos.</p>
 
             <!-- STEP 1: FORMAT -->
             <div class="step-section" style="margin-top: 60px;">
@@ -786,39 +765,16 @@
         </div>
     </section>
 
-    <!-- STEP 4: UPLOAD PHOTOS -->
-    <section class="upload-photos bg-linen">
-        <div class="container">
-            <div class="step-section">
-                <div class="step-header">
-                    <div class="step-number">Step 4</div>
-                    <h2>Upload Your Photos</h2>
-                </div>
-
-                <div class="upload-zone" onclick="document.getElementById('photo-input').click()">
-                    <div class="upload-icon">📷</div>
-                    <h3>Drop your photos here</h3>
-                    <p>or click to browse</p>
-                    <p class="upload-instructions">
-                        Upload one photo to repeat it on all magnets, or upload multiple photos (one per magnet).
-                        <br>Accepted formats: JPG, PNG · Max 10MB per file
-                    </p>
-                </div>
-                <input type="file" id="photo-input" accept="image/jpeg,image/jpg,image/png" multiple style="display:none" onchange="handlePhotoUpload(event)">
-            </div>
-        </div>
-    </section>
-
-    <!-- STEP 5: YOUR DETAILS -->
+    <!-- STEP 4: YOUR DETAILS -->
     <section class="customer-details bg-off-white">
         <div class="container">
             <div class="step-section">
                 <div class="step-header">
-                    <div class="step-number">Step 5</div>
+                    <div class="step-number">Step 4</div>
                     <h2>Your Details</h2>
                 </div>
 
-                <form class="order-form" id="order-form">
+                <form class="order-form" id="order-form" data-minnk-order data-source="your-photos" data-send-mode="photos">
                     <!-- Hidden fields for order details -->
                     <input type="hidden" name="form_type" value="your_photos">
                     <input type="hidden" id="form-format" name="format" value="">
@@ -836,22 +792,27 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+45..." required>
+                        <label>How would you like to send your photos?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="contact_method" value="whatsapp" required>
+                                <span class="radio-label">WhatsApp</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contact_method" value="email" required>
+                                <span class="radio-label">Email</span>
+                            </label>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="contact-preference">Preferred contact method</label>
-                        <select id="contact-preference" name="contact_preference" required>
-                            <option value="">Select one</option>
-                            <option value="email">Email</option>
-                            <option value="phone">Phone</option>
-                        </select>
+                    <div class="form-group" data-phone-field style="display: none;">
+                        <label for="phone">WhatsApp number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+45...">
                     </div>
 
                     <div class="form-group">
                         <label for="postal-code">Postal Code</label>
-                        <input type="text" id="postal-code" name="postal-code" required>
+                        <input type="text" id="postal-code" name="postal_code" required>
                         <p class="form-note">Free delivery in Copenhagen · Shipping coordinated elsewhere</p>
                     </div>
 
@@ -864,16 +825,16 @@
         </div>
     </section>
 
-    <!-- STEP 6: REVIEW & SUBMIT -->
+    <!-- STEP 5: REVIEW & SUBMIT -->
     <section class="review-submit bg-linen">
         <div class="container">
             <div class="step-section">
                 <div class="step-header">
-                    <div class="step-number">Step 6</div>
+                    <div class="step-number">Step 5</div>
                     <h2>Review & Submit</h2>
                 </div>
 
-                <div class="summary-box">
+                <div class="summary-box" data-hide-on-success>
                     <div class="summary-row">
                         <span class="label">Format</span>
                         <span class="value">Button 50×50mm</span>
@@ -881,10 +842,6 @@
                     <div class="summary-row">
                         <span class="label">Quantity</span>
                         <span class="value">Pack of 8</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="label">Photos</span>
-                        <span class="value">1 uploaded</span>
                     </div>
                     <div class="summary-row">
                         <span class="label">Delivery</span>
@@ -901,7 +858,7 @@
                     </div>
                 </div>
 
-                <button type="submit" form="order-form">Submit Request</button>
+                <button type="submit" form="order-form" data-hide-on-success>Submit Request</button>
             </div>
         </div>
     </section>
@@ -924,7 +881,6 @@
             format: 'button', // 'button' or 'flat'
             style: 'frame',   // 'frame' or 'polaroid' (only for flat)
             quantity: 4,
-            photos: [],
             postalCode: '',
             preSelected: false // tracks if came from Start Here
         };
@@ -1158,66 +1114,6 @@
         }
 
         // ==================== PHOTO UPLOAD ====================
-        function handlePhotoUpload(event) {
-            const files = Array.from(event.target.files);
-            const validFiles = [];
-
-            files.forEach(file => {
-                // Validate file type
-                if (!file.type.match('image/(jpeg|jpg|png)')) {
-                    alert(`${file.name} is not a valid image format. Please upload JPG or PNG.`);
-                    return;
-                }
-
-                // Validate file size (10MB max)
-                if (file.size > 10 * 1024 * 1024) {
-                    alert(`${file.name} is too large. Maximum size is 10MB.`);
-                    return;
-                }
-
-                validFiles.push(file);
-            });
-
-            state.photos = validFiles;
-            updatePhotoPreview();
-            updateSummary();
-        }
-
-        function updatePhotoPreview() {
-            const uploadZone = document.querySelector('.upload-zone');
-
-            if (state.photos.length === 0) {
-                uploadZone.innerHTML = `
-                    <div class="upload-icon">📷</div>
-                    <h3>Drop your photos here</h3>
-                    <p>or click to browse</p>
-                    <p class="upload-instructions">
-                        Upload one photo to repeat it on all magnets, or upload multiple photos (one per magnet).
-                        <br>Accepted formats: JPG, PNG · Max 10MB per file
-                    </p>
-                    <input type="file" id="photo-input" accept="image/jpeg,image/jpg,image/png" multiple style="display:none" onchange="handlePhotoUpload(event)">
-                `;
-            } else {
-                uploadZone.innerHTML = `
-                    <div class="upload-icon">✓</div>
-                    <h3>${state.photos.length} photo${state.photos.length > 1 ? 's' : ''} uploaded</h3>
-                    <p class="upload-instructions">
-                        ${state.photos.map(f => f.name).join(', ')}
-                        <br><button type="button" onclick="clearPhotos()" style="margin-top:12px; padding:8px 16px; background:var(--ink); color:var(--off-white); border:none; border-radius:4px; cursor:pointer;">Change photos</button>
-                    </p>
-                `;
-            }
-
-            // Re-attach click handler
-            uploadZone.onclick = () => document.getElementById('photo-input')?.click();
-        }
-
-        function clearPhotos() {
-            state.photos = [];
-            updatePhotoPreview();
-            updateSummary();
-        }
-
         // ==================== POSTAL CODE & DELIVERY ====================
         function updatePostalCode(event) {
             state.postalCode = event.target.value;
@@ -1245,72 +1141,15 @@
                            (state.style === 'frame' ? 'flatFrame' : 'flatPolaroid');
             const price = prices[priceKey][state.quantity];
 
-            const photosText = state.photos.length === 0 ? 'No photos uploaded' :
-                              `${state.photos.length} uploaded`;
-
             document.querySelector('.summary-box .summary-row:nth-child(1) .value').textContent = formatText;
             document.querySelector('.summary-box .summary-row:nth-child(2) .value').textContent = `Pack of ${state.quantity}`;
-            document.querySelector('.summary-box .summary-row:nth-child(3) .value').textContent = photosText;
-            document.querySelector('.summary-box .summary-row:nth-child(4) .value').textContent = getDeliveryText();
+            document.querySelector('.summary-box .summary-row:nth-child(3) .value').textContent = getDeliveryText();
             document.querySelector('.summary-total .value').textContent = `DKK ${price}`;
 
             // Update hidden form fields
             document.getElementById('form-format').value = formatText;
             document.getElementById('form-quantity').value = state.quantity;
             document.getElementById('form-price').value = price;
-        }
-
-        // ==================== FORM SUBMISSION ====================
-        function handleFormSubmit(event) {
-            event.preventDefault();
-
-            // Validate photos
-            if (state.photos.length === 0) {
-                alert('Please upload at least one photo before submitting.');
-                return;
-            }
-
-            // Create FormData
-            const formData = new FormData(event.target);
-
-            // Add photos as attachments
-            state.photos.forEach((file, index) => {
-                formData.append(`photo_${index + 1}`, file);
-            });
-
-            // Submit to Formspree
-            fetch('https://formspree.io/f/xqegqgzb', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show confirmation message
-                    document.querySelector('.review-submit').innerHTML = `
-                        <div class="container">
-                            <div style="text-align:center; padding:80px 20px;">
-                                <h2 style="color:var(--burgundy); margin-bottom:16px;">Request Received!</h2>
-                                <p style="font-size:16px; color:var(--ink); max-width:500px; margin:0 auto 24px;">
-                                    Thank you! We've received your request and will review your photos.
-                                    You'll receive a preview and confirmation before any payment.
-                                </p>
-                                <p style="font-size:14px; color:var(--stone);">
-                                    We'll contact you at <strong>${formData.get('email')}</strong>
-                                </p>
-                                <a href="index.html" style="display:inline-block; margin-top:32px; padding:14px 32px; background:var(--ink); color:var(--off-white); text-decoration:none; border-radius:4px;">Back to Home</a>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    alert('There was a problem submitting your request. Please try again or contact us directly.');
-                }
-            })
-            .catch(error => {
-                alert('There was a problem submitting your request. Please try again or contact us directly.');
-            });
         }
 
         // ==================== INITIALIZATION ====================
@@ -1324,9 +1163,6 @@
                 handleComboFromURL(combo);
             } else {
                 // Normal initialization for manual flow
-                // Initialize upload zone
-                updatePhotoPreview();
-
                 // Set default selections
                 updateQuantityOptions();
                 updateSummary();
@@ -1337,9 +1173,6 @@
 
             // Attach postal code listener
             document.getElementById('postal-code').addEventListener('input', updatePostalCode);
-
-            // Attach form submission
-            document.getElementById('order-form').addEventListener('submit', handleFormSubmit);
         });
 
         // ==================== HANDLE COMBO FROM URL ====================
@@ -1366,9 +1199,6 @@
                 // Initialize product carousel with this combo's images
                 initCarousel(combo);
 
-                // Initialize upload zone (needed before calling selectStartHerePackage)
-                updatePhotoPreview();
-
                 // Call existing pre-selection function
                 selectStartHerePackage(
                     comboData.format,
@@ -1378,13 +1208,24 @@
                 );
             } else {
                 // Invalid combo, fall back to normal flow
-                updatePhotoPreview();
                 updateQuantityOptions();
                 updateSummary();
                 document.querySelector('.style-selection').style.display = 'none';
             }
         }
     </script>
+    <script src="js/order-form.js"></script>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/4591118494?text=Hi%20MINNK!%20I%20have%20a%20question%3A"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener"
+       aria-label="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
 
 </body>
 </html>

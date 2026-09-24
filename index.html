@@ -15,6 +15,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
 
+    <!-- WhatsApp Button -->
+    <link rel="stylesheet" href="css/whatsapp-button.css">
+
     <style>
         /* ==================== VARIABLES ==================== */
         :root {
@@ -567,6 +570,7 @@
             font-family: var(--font-body);
             font-size: 15px;
             border: 1px solid var(--off-white);
+            border-radius: 4px;
             background: transparent;
             color: var(--off-white);
         }
@@ -592,6 +596,7 @@
             background: var(--off-white);
             color: var(--burgundy);
             border: none;
+            border-radius: 4px;
             cursor: pointer;
             transition: opacity 0.2s;
         }
@@ -820,7 +825,7 @@
         <img class="hero-image" src="images/hero-home.jpg" alt="MINNK custom photo magnets on warm surface">
         <div class="hero-content">
             <h1><span class="nowrap">Your photos. Your places. Your business.</span><br>All made to last.</h1>
-            <p class="hero-subtitle">Custom photo magnets designed and printed in Copenhagen</p>
+            <p class="hero-subtitle">Custom photo magnets designed and made in Copenhagen</p>
             <a href="your-photos.html" class="hero-cta">Shop Your Photos</a>
         </div>
     </section>
@@ -852,7 +857,7 @@
                 <circle cx="10" cy="22" r="2.6"/>
                 <circle cx="27" cy="22" r="2.6"/>
             </svg>
-            <span class="trust-text">Delivered in 3-4 business days</span>
+            <span class="trust-text">Fast local delivery</span>
         </div>
     </div>
 
@@ -860,7 +865,7 @@
     <section class="start-here bg-linen">
         <div class="container">
             <h2>Start Here</h2>
-            <p>Quick picks, zero decisions. Choose your pack and upload your photos.</p>
+            <p>Quick picks, zero decisions. Choose your pack, then send us your photos.</p>
 
             <div class="start-here-grid">
                 <a href="your-photos.html?combo=button-8pack" class="combo-card">
@@ -954,8 +959,8 @@
 
                 <div class="step-card">
                     <div class="step-number">02</div>
-                    <h3>Upload Your Photos</h3>
-                    <p>One photo or many — we'll match them to your pack</p>
+                    <h3>Send Your Photos</h3>
+                    <p>After your request, send them to us by WhatsApp or email</p>
                 </div>
 
                 <div class="step-card">
@@ -985,7 +990,7 @@
             <h2>Something Else in Mind?</h2>
             <p>Have a custom idea, special occasion, or questions? Let's talk.</p>
 
-            <form class="contact-form" action="https://formspree.io/f/xqegqgzb" method="POST" enctype="multipart/form-data">
+            <form class="contact-form" id="contact-form">
                 <input type="hidden" name="form_type" value="contact">
 
                 <div class="form-group">
@@ -1008,11 +1013,6 @@
                         <input type="checkbox" id="whatsapp_ok" name="whatsapp_ok" style="width: auto; margin: 0;">
                         <span>OK to reach me on WhatsApp</span>
                     </label>
-                </div>
-
-                <div class="form-group">
-                    <label for="image">Add a reference image (optional)</label>
-                    <input type="file" id="image" name="image" accept="image/*">
                 </div>
 
                 <div class="form-group">
@@ -1067,6 +1067,93 @@
             }
         });
     </script>
+
+    <script>
+        // Contact form handler
+        (function() {
+            const form = document.getElementById('contact-form');
+            if (!form) return;
+
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                const submitButton = form.querySelector('button[type="submit"]');
+                if (!submitButton) return;
+
+                // Disable button and change text
+                const originalButtonText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
+                // Prepare form data
+                const formData = new FormData(form);
+                formData.append('_subject', 'New message from minnkstudio.com');
+
+                try {
+                    const response = await fetch('https://formspree.io/f/mrpbkogw', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Success: replace form with confirmation message
+                        const formContainer = form.parentElement;
+                        const sectionTitle = formContainer.querySelector('h2');
+
+                        formContainer.innerHTML = '';
+
+                        if (sectionTitle) {
+                            formContainer.appendChild(sectionTitle);
+                        }
+
+                        const confirmation = document.createElement('p');
+                        confirmation.style.cssText = 'font-family: var(--font-body); font-size: 16px; color: var(--off-white); text-align: center; padding: 40px 20px;';
+                        confirmation.textContent = "Thanks, we've got your message. We'll get back to you soon.";
+                        formContainer.appendChild(confirmation);
+                    } else {
+                        // Error: show error message
+                        showError(form, submitButton, originalButtonText);
+                    }
+                } catch (error) {
+                    // Network error: show error message
+                    console.error('Contact form error:', error);
+                    showError(form, submitButton, originalButtonText);
+                }
+            });
+
+            function showError(form, submitButton, originalButtonText) {
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+
+                // Check if error message already exists
+                let errorMessage = form.querySelector('.contact-error-message');
+
+                if (!errorMessage) {
+                    errorMessage = document.createElement('div');
+                    errorMessage.className = 'contact-error-message';
+                    errorMessage.style.cssText = 'font-family: var(--font-body); font-size: 14px; color: var(--off-white); text-align: center; margin-bottom: 20px; padding: 16px; background: rgba(252, 251, 249, 0.1); border-radius: 4px;';
+                    errorMessage.innerHTML = 'Something went wrong. Please try again or <a href="https://wa.me/4591118494" target="_blank" style="color: var(--off-white); text-decoration: underline;">message us on WhatsApp</a>.';
+
+                    form.insertBefore(errorMessage, submitButton);
+                }
+            }
+        })();
+    </script>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/4591118494?text=Hi%20MINNK!%20I%20have%20a%20question%3A"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener"
+       aria-label="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
 
 </body>
 </html>

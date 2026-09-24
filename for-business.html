@@ -15,6 +15,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="logo_vectorizado/minnk-favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo_vectorizado/minnk-favicon-180.png">
 
+    <!-- WhatsApp Button -->
+    <link rel="stylesheet" href="css/whatsapp-button.css">
+
     <style>
         /* ==================== VARIABLES ==================== */
         :root {
@@ -224,6 +227,7 @@
 
         .quantity-card {
             border: 2px solid var(--almond);
+            border-radius: 4px;
             padding: 24px 16px;
             text-align: center;
             cursor: pointer;
@@ -254,36 +258,6 @@
         }
 
         /* ==================== UPLOAD ZONE ==================== */
-        .upload-zone {
-            margin-top: 32px;
-            border: 3px dashed var(--almond);
-            padding: 60px 20px;
-            text-align: center;
-            background: var(--linen);
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .upload-zone:hover {
-            border-color: var(--burgundy);
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            color: var(--almond);
-            margin-bottom: 16px;
-        }
-
-        .upload-zone h3 {
-            margin-bottom: 8px;
-        }
-
-        .upload-instructions {
-            font-size: 13px;
-            color: var(--stone);
-            margin-top: 12px;
-        }
-
         /* ==================== FORM ==================== */
         .order-form {
             margin-top: 32px;
@@ -314,6 +288,7 @@
             font-family: var(--font-body);
             font-size: 15px;
             border: 1px solid var(--almond);
+            border-radius: 4px;
             background: var(--off-white);
             color: var(--ink);
         }
@@ -340,6 +315,7 @@
             padding: 32px;
             background: var(--linen);
             border: 1px solid var(--almond);
+            border-radius: 4px;
         }
 
         .summary-row {
@@ -394,6 +370,7 @@
             background: var(--ink);
             color: var(--off-white);
             border: none;
+            border-radius: 4px;
             cursor: pointer;
             transition: opacity 0.2s;
         }
@@ -601,6 +578,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="css/order-form.css">
 </head>
 <body>
 
@@ -752,40 +730,16 @@
         </div>
     </section>
 
-    <!-- STEP 2: UPLOAD LOGO/QR -->
-    <section class="upload-artwork bg-linen">
-        <div class="container">
-            <div class="step-section">
-                <div class="step-header">
-                    <div class="step-number">Step 2</div>
-                    <h2>Upload Your Logo or QR Code</h2>
-                </div>
-
-                <div class="upload-zone" onclick="document.getElementById('logo-input').click()">
-                    <div class="upload-icon">🎨</div>
-                    <h3>Drop your file here</h3>
-                    <p>or click to browse</p>
-                    <p class="upload-instructions">
-                        Upload your logo (PNG, SVG, AI, PDF) or QR code image.
-                        <br>High resolution preferred · Max 10MB
-                        <br>We'll check quality and confirm before production.
-                    </p>
-                </div>
-                <input type="file" id="logo-input" accept="image/*,.pdf,.ai,.svg" style="display:none" onchange="handleLogoUpload(event)">
-            </div>
-        </div>
-    </section>
-
-    <!-- STEP 3: YOUR DETAILS -->
+    <!-- STEP 2: YOUR DETAILS -->
     <section class="business-details bg-off-white">
         <div class="container">
             <div class="step-section">
                 <div class="step-header">
-                    <div class="step-number">Step 3</div>
+                    <div class="step-number">Step 2</div>
                     <h2>Your Details</h2>
                 </div>
 
-                <form class="order-form" id="business-form">
+                <form class="order-form" id="business-form" data-minnk-order data-source="for-business" data-send-mode="logo">
                     <!-- Hidden fields for order details -->
                     <input type="hidden" name="form_type" value="for_business">
                     <input type="hidden" name="product" value="Button 50×50mm">
@@ -798,7 +752,7 @@
 
                     <div class="form-group">
                         <label for="contact-name">Contact Person</label>
-                        <input type="text" id="contact-name" name="contact-name" required>
+                        <input type="text" id="contact-name" name="name" required>
                     </div>
 
                     <div class="form-group">
@@ -807,22 +761,28 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+45..." required>
+                        <label>How would you like to send your logo?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="contact_method" value="whatsapp" required>
+                                <span class="radio-label">WhatsApp</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contact_method" value="email" required>
+                                <span class="radio-label">Email</span>
+                            </label>
+                        </div>
+                        <p class="form-note" style="margin-top: 12px; color: var(--stone);">PNG, SVG, AI or PDF. High resolution preferred.</p>
                     </div>
 
-                    <div class="form-group">
-                        <label for="contact-preference">Preferred contact method</label>
-                        <select id="contact-preference" name="contact_preference" required>
-                            <option value="">Select one</option>
-                            <option value="email">Email</option>
-                            <option value="phone">Phone</option>
-                        </select>
+                    <div class="form-group" data-phone-field style="display: none;">
+                        <label for="phone">WhatsApp number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+45...">
                     </div>
 
                     <div class="form-group">
                         <label for="postal-code">Postal Code</label>
-                        <input type="text" id="postal-code" name="postal-code" required>
+                        <input type="text" id="postal-code" name="postal_code" required>
                         <p class="form-note">Free delivery in Copenhagen · Shipping coordinated elsewhere</p>
                     </div>
 
@@ -835,16 +795,16 @@
         </div>
     </section>
 
-    <!-- STEP 4: REVIEW & SUBMIT -->
+    <!-- STEP 3: REVIEW & SUBMIT -->
     <section class="review-submit bg-linen">
         <div class="container">
             <div class="step-section">
                 <div class="step-header">
-                    <div class="step-number">Step 4</div>
+                    <div class="step-number">Step 3</div>
                     <h2>Review & Submit</h2>
                 </div>
 
-                <div class="summary-box">
+                <div class="summary-box" data-hide-on-success>
                     <div class="summary-row">
                         <span class="label">Product</span>
                         <span class="value">Button 50×50mm</span>
@@ -852,10 +812,6 @@
                     <div class="summary-row">
                         <span class="label">Quantity</span>
                         <span class="value">25 pieces</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="label">Artwork</span>
-                        <span class="value">No file uploaded</span>
                     </div>
                     <div class="summary-row">
                         <span class="label">Delivery</span>
@@ -872,7 +828,7 @@
                     </div>
                 </div>
 
-                <button type="submit" form="business-form">Submit Request</button>
+                <button type="submit" form="business-form" data-hide-on-success>Submit Request</button>
             </div>
         </div>
     </section>
@@ -893,7 +849,6 @@
         // ==================== STATE MANAGEMENT ====================
         const state = {
             quantity: 25,
-            logoFile: null,
             postalCode: '',
             currentImageIndex: 0
         };
@@ -967,58 +922,6 @@
         }
 
         // ==================== LOGO/QR UPLOAD ====================
-        function handleLogoUpload(event) {
-            const file = event.target.files[0];
-
-            if (!file) return;
-
-            // Validate file size (10MB max)
-            if (file.size > 10 * 1024 * 1024) {
-                alert('File is too large. Maximum size is 10MB.');
-                return;
-            }
-
-            state.logoFile = file;
-            updateLogoPreview();
-            updateSummary();
-        }
-
-        function updateLogoPreview() {
-            const uploadZone = document.querySelector('.upload-zone');
-
-            if (!state.logoFile) {
-                uploadZone.innerHTML = `
-                    <div class="upload-icon">🎨</div>
-                    <h3>Drop your file here</h3>
-                    <p>or click to browse</p>
-                    <p class="upload-instructions">
-                        Upload your logo (PNG, SVG, AI, PDF) or QR code image.
-                        <br>High resolution preferred · Max 10MB
-                        <br>We'll check quality and confirm before production.
-                    </p>
-                    <input type="file" id="logo-input" accept="image/*,.pdf,.ai,.svg" style="display:none" onchange="handleLogoUpload(event)">
-                `;
-            } else {
-                uploadZone.innerHTML = `
-                    <div class="upload-icon">✓</div>
-                    <h3>File uploaded</h3>
-                    <p class="upload-instructions">
-                        ${state.logoFile.name}
-                        <br><button type="button" onclick="clearLogo()" style="margin-top:12px; padding:8px 16px; background:var(--ink); color:var(--off-white); border:none; border-radius:4px; cursor:pointer;">Change file</button>
-                    </p>
-                `;
-            }
-
-            // Re-attach click handler
-            uploadZone.onclick = () => document.getElementById('logo-input')?.click();
-        }
-
-        function clearLogo() {
-            state.logoFile = null;
-            updateLogoPreview();
-            updateSummary();
-        }
-
         // ==================== POSTAL CODE & DELIVERY ====================
         function updatePostalCode(event) {
             state.postalCode = event.target.value;
@@ -1037,67 +940,14 @@
 
         // ==================== SUMMARY UPDATE ====================
         function updateSummary() {
-            const logoText = state.logoFile ? '1 file uploaded' : 'No file uploaded';
             const price = prices[state.quantity];
 
             document.querySelector('.summary-box .summary-row:nth-child(2) .value').textContent = `${state.quantity} pieces`;
-            document.querySelector('.summary-box .summary-row:nth-child(3) .value').textContent = logoText;
-            document.querySelector('.summary-box .summary-row:nth-child(4) .value').textContent = getDeliveryText();
+            document.querySelector('.summary-box .summary-row:nth-child(3) .value').textContent = getDeliveryText();
             document.querySelector('.summary-total .value').textContent = `DKK ${price.toLocaleString('da-DK')}`;
 
             // Update hidden form fields
             document.getElementById('form-quantity').value = state.quantity;
-        }
-
-        // ==================== FORM SUBMISSION ====================
-        function handleFormSubmit(event) {
-            event.preventDefault();
-
-            // Validate logo upload
-            if (!state.logoFile) {
-                alert('Please upload your logo or QR code before submitting.');
-                return;
-            }
-
-            // Create FormData
-            const formData = new FormData(event.target);
-
-            // Add logo as attachment
-            formData.append('logo', state.logoFile);
-
-            // Submit to Formspree
-            fetch('https://formspree.io/f/xqegqgzb', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show confirmation message
-                    document.querySelector('.review-submit').innerHTML = `
-                        <div class="container">
-                            <div style="text-align:center; padding:80px 20px;">
-                                <h2 style="color:var(--burgundy); margin-bottom:16px;">Request Received!</h2>
-                                <p style="font-size:16px; color:var(--ink); max-width:500px; margin:0 auto 24px;">
-                                    Thank you! We've received your request and will review your artwork.
-                                    You'll receive a proof and final quote before any payment.
-                                </p>
-                                <p style="font-size:14px; color:var(--stone);">
-                                    We'll contact you at <strong>${formData.get('email')}</strong>
-                                </p>
-                                <a href="index.html" style="display:inline-block; margin-top:32px; padding:14px 32px; background:var(--ink); color:var(--off-white); text-decoration:none; border-radius:4px;">Back to Home</a>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    alert('There was a problem submitting your request. Please try again or contact us directly.');
-                }
-            })
-            .catch(error => {
-                alert('There was a problem submitting your request. Please try again or contact us directly.');
-            });
         }
 
         // ==================== INITIALIZATION ====================
@@ -1110,11 +960,20 @@
 
             // Attach postal code listener
             document.getElementById('postal-code').addEventListener('input', updatePostalCode);
-
-            // Attach form submission
-            document.getElementById('business-form').addEventListener('submit', handleFormSubmit);
         });
     </script>
+    <script src="js/order-form.js"></script>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/4591118494?text=Hi%20MINNK!%20I%20have%20a%20question%3A"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener"
+       aria-label="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
 
 </body>
 </html>

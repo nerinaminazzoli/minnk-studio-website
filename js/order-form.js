@@ -147,7 +147,7 @@
                 const whatsappMessage = sendMode === 'photos'
                     ? `Hi MINNK! My request is ${orderCode}. Here are my photos:`
                     : `Hi MINNK! My request is ${orderCode}. Here is my logo:`;
-                const whatsappURL = `https://wa.me/4591118494?text=${encodeURIComponent(whatsappMessage)}`;
+                const whatsappURL = `https://wa.me/4571848182?text=${encodeURIComponent(whatsappMessage)}`;
 
                 confirmationHTML += `
                     <a href="${whatsappURL}" class="minnk-confirmation-button" target="_blank">
@@ -223,7 +223,7 @@
             errorMessage.className = 'minnk-error-message';
             errorMessage.innerHTML = `
                 Something went wrong. Please try again or
-                <a href="https://wa.me/4591118494" target="_blank">message us on WhatsApp</a>.
+                <a href="https://wa.me/4571848182" target="_blank">message us on WhatsApp</a>.
             `;
 
             // Insert before submit button
